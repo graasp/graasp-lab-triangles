@@ -1,5 +1,9 @@
 import React from 'react';
-import { Alert, Button, Card, CardTitle, CardText, Col, Container, Form, FormGroup, Label, Input, Row } from 'reactstrap';
+import {
+  Alert, Button, Card, CardTitle,
+  CardText, Col, Container, Form,
+  FormGroup, Label, Input, Row,
+} from 'reactstrap';
 import Logo from '../logo.svg';
 
 const StudentView = () => (
@@ -23,8 +27,14 @@ const StudentView = () => (
               <span>Triangle A dimensions here</span>
             </CardTitle>
             <div className="clearfix">
-              <span className="float-left"><input type="radio" name="triangleAsize" checked/> Use Sizes</span>
-              <span className="float-right"><input type="radio" name="triangleAsize"/> Use Angles</span>
+              <span className="float-left">
+                <input type="radio" name="triangleAsize" checked />
+                Use Sizes
+              </span>
+              <span className="float-right">
+                <input type="radio" name="triangleAsize" />
+                Use Angles
+              </span>
             </div>
             <CardText className="py-3">
               <Form>
@@ -59,8 +69,14 @@ const StudentView = () => (
           <Col md="6" className="pt-4 right-border top-border">
             <h5>Triangle B dimensions here</h5>
             <div className="clearfix">
-              <span className="float-left"><input type="radio" name="triangleBsize" checked/> Use Sizes</span>
-              <span className="float-right"><input type="radio" name="triangleBsize"/> Use Angles</span>
+              <span className="float-left">
+                <input type="radio" name="triangleBsize" checked />
+                Use Sizes
+              </span>
+              <span className="float-right">
+                <input type="radio" name="triangleBsize" />
+                Use Angles
+              </span>
             </div>
             <CardText className="py-3">
               <div>
