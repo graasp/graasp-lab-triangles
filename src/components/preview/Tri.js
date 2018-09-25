@@ -1,6 +1,5 @@
 import React from 'react';
-import { Col } from 'reactstrap';
-import { Stage, Layer, Shape } from "react-konva";
+import { Layer, Shape } from "react-konva";
 
 const Tri = () => (
   <Layer>

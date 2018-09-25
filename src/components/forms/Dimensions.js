@@ -1,7 +1,7 @@
 import React from 'react';
 import {
-  CardText, CardTitle,
-  Col, Form, FormGroup, Input, Label, Row,
+  CardTitle, Col, Form,
+  FormGroup, Input, Label, Row,
 } from 'reactstrap';
 import { Stage } from "react-konva";
 import Tri from '../preview/Tri';
@@ -43,14 +43,11 @@ const Dimensions = () => (
         </FormGroup>
       </Form>
     </Col>
-    <Stage width="400" height="300">
+    
+    <Stage width="300" height="300">
       <Tri
         points={[{ x: 150, y: 500 }, { x: 500, y: 250 }, { x: 300, y: 250 }]}
         color="black"
-      />
-      <Tri
-        points={[{ x: 500, y: 100 }, { x: 150, y: 700 }, { x: 500, y: 700 }]}
-        color="red"
       />
     </Stage>
   </Row>
