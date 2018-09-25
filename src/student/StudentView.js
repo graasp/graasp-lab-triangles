@@ -1,7 +1,7 @@
 import React from 'react';
 import { Alert, Card, Container } from 'reactstrap';
 import SimulationButtons from '../components/common/SimulationButtons';
-import TriangleDimensions from '../components/forms/TriangleDimensions';
+import Dimensions from '../components/forms/Dimensions';
 import Logo from '../logo.svg';
 
 const StudentView = () => (
@@ -19,8 +19,8 @@ const StudentView = () => (
       </Alert>
 
       <Card body>
-        <TriangleDimensions />
-        <TriangleDimensions />
+        <Dimensions />
+        <Dimensions />
       </Card>
 
       <SimulationButtons />
