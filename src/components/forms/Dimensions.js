@@ -1,56 +1,78 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
-  CardTitle, Col, Form,
-  FormGroup, Input, Label, Row,
+  CardTitle, Col,
+  Input, Row,
 } from 'reactstrap';
-import { Stage } from "react-konva";
+import { Stage } from 'react-konva';
 import Tri from '../preview/Tri';
+import FormViews from './FormViews';
 
-const Dimensions = () => (
-  <Row className="px-5">
-    <Col md="6" className="right-border">
-      <CardTitle>
-        <span>Triangle A dimensions here</span>
-      </CardTitle>
-      <div className="clearfix">
-        <span className="float-left">
-          <input type="radio" name="triangleAsize" />
-          &nbsp;Use Sizes
-        </span>
-        <span className="float-right">
-          <input type="radio" name="triangleAsize" />
-          &nbsp;Use Angles
-        </span>
-      </div>
-      <Form>
-        <FormGroup row>
-          <Label sm={2}>Side A</Label>
-          <Col sm={10}>
-            <Input type="number" min="0" placeholder="Side A size" />
-          </Col>
-        </FormGroup>
-        <FormGroup row>
-          <Label sm={2}>Side B</Label>
-          <Col sm={10}>
-            <Input type="number" min="0" placeholder="Side B size" />
-          </Col>
-        </FormGroup>
-        <FormGroup row>
-          <Label sm={2}>Side C</Label>
-          <Col sm={10}>
-            <Input type="number" min="0" placeholder="Side C size" />
-          </Col>
-        </FormGroup>
-      </Form>
-    </Col>
-    
-    <Stage width="300" height="300">
-      <Tri
-        points={[{ x: 150, y: 500 }, { x: 500, y: 250 }, { x: 300, y: 250 }]}
-        color="black"
-      />
-    </Stage>
-  </Row>
-);
 
+class Dimensions extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: true,
+      color: '#555555',
+      point: [
+        { x: 50, y: 50 },
+        { x: 200, y: 100 },
+        { x: 100, y: 150 },
+      ],
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleView = this.handleView.bind(this);
+  }
+
+  handleChange(e) {
+    e.preventDefault();
+    console.log('handle change called', e.target.value);
+    this.setState({ color: e.target.value });
+  }
+
+  handleView(e, { value }) {
+    this.setState({ value: value })
+  }
+
+  render() {
+    const { name } = this.props;
+    return (
+      <Row className="px-5">
+        <Col md="6" className="right-border">
+          <CardTitle>
+            <span>Triangle A dimensions here</span>
+          </CardTitle>
+          <div className="clearfix">
+            <span className="float-left">
+              <Input name={`${name}-choice`} type="radio" checked={this.state.value} onChange={this.handleView} value="useSize" />
+              &nbsp;Use Sides
+            </span>
+            <span className="float-right">
+              <Input name={`${name}-choice`} type="radio" onClick={this.handleView} value="useAngle" />
+              &nbsp;Use Angles
+            </span>
+          </div>
+          <FormViews
+            value={this.state.value}
+            handleChange={this.handleChange}
+          />
+        </Col>
+
+        <Stage width="300" height="300">
+          <Tri
+            points={
+              [
+                { x: this.state.point[0].x, y: this.state.point[0].y },
+                { x: this.state.point[1].x, y: this.state.point[1].y },
+                { x: this.state.point[2].x, y: this.state.point[2].y }
+              ]
+            }
+            color={this.state.color}
+
+          />
+        </Stage>
+      </Row>
+    );
+  }
+}
 export default Dimensions;
