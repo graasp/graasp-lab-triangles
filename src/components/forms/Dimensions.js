@@ -24,14 +24,13 @@ class Dimensions extends Component {
     this.handleView = this.handleView.bind(this);
   }
 
-  handleChange(e) {
-    e.preventDefault();
-    console.log('handle change called', e.target.value);
-    this.setState({ color: e.target.value });
+  handleChange([v1, v2, v3]) {
+    console.log('values', v1, v2, v3);
+    this.setState({ color: `#${v1}${v2}${v3}` });
   }
 
   handleView(e, { value }) {
-    this.setState({ value: value })
+    this.setState({ value })
   }
 
   render() {
