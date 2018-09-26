@@ -17,8 +17,7 @@ class FormViews extends Component {
       '00',
       '00',
       '00',
-    ],
-    min: 0,
+    ]
   }
 
   handleInputChange = (event) => {
@@ -34,25 +33,26 @@ class FormViews extends Component {
 
   render() {
     const { value, min } = this.props;
+    const { colors } = this.state;
     if (value) {
       return (
         <Form>
           <FormGroup row>
             <Label sm={2}>Side A</Label>
             <Col sm={10}>
-              <Input name="" data-index="0" type="text" min={this.state.min} value={this.state.colors[0]} onChange={this.handleInputChange} placeholder="Side A size" />
+              <Input name="" data-index="0" type="text" min={min} value={colors[0]} onChange={this.handleInputChange} placeholder="Side A size" />
             </Col>
           </FormGroup>
           <FormGroup row>
             <Label sm={2}>Side B</Label>
             <Col sm={10}>
-              <Input name="" data-index="1" type="text" value={this.state.colors[1]} onChange={this.handleInputChange} placeholder="Side B size" />
+              <Input name="" data-index="1" type="text" value={colors[1]} onChange={this.handleInputChange} placeholder="Side B size" />
             </Col>
           </FormGroup>
           <FormGroup row>
             <Label sm={2}>Side C</Label>
             <Col sm={10}>
-              <Input name="" data-index="2" type="text" value={this.state.colors[2]} onChange={this.handleInputChange} placeholder="Side C size" />
+              <Input name="" data-index="2" type="text" value={colors[2]} onChange={this.handleInputChange} placeholder="Side C size" />
             </Col>
           </FormGroup>
         </Form>
