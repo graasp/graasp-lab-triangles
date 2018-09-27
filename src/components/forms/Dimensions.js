@@ -29,8 +29,8 @@ class Dimensions extends Component {
     this.setState({ color: `#${v1}${v2}${v3}` });
   }
 
-  handleView(e, { value }) {
-    this.setState({ value })
+  handleView(value) {
+    this.setState({ value: !this.state.value })
   }
 
   render() {
@@ -43,11 +43,11 @@ class Dimensions extends Component {
           </CardTitle>
           <div className="clearfix">
             <span className="float-left">
-              <Input name={`${name}-choice`} type="radio" checked={this.state.value} onChange={this.handleView} value="useSize" />
+              <Input name={`${name}-choice`} type="radio" checked={this.state.value} onChange={this.handleView} />
               &nbsp;Use Sides
             </span>
             <span className="float-right">
-              <Input name={`${name}-choice`} type="radio" onClick={this.handleView} value="useAngle" />
+              <Input name={`${name}-choice`} type="radio" onChange={this.handleView} />
               &nbsp;Use Angles
             </span>
           </div>
