@@ -19,8 +19,8 @@ const StudentView = () => (
       </Alert>
 
       <Card body>
-        <Dimensions name="t1" />
-        <Dimensions name="t2" />
+        <Dimensions name="tri1" />
+        <Dimensions name="tri2" />
       </Card>
 
       <SimulationButtons />

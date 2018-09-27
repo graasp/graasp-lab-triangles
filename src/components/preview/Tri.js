@@ -16,7 +16,7 @@ class Tri extends Component {
           }}
           fill="white"
           stroke={this.props.color}
-          strokeWidth={6}
+          strokeWidth={2}
         />
       </Layer>
     );
