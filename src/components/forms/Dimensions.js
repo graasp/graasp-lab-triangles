@@ -13,7 +13,7 @@ class Dimensions extends Component {
     super(props);
     this.state = {
       value: true,
-      color: '#555555',
+      color: '#111111',
       point: [
         { x: 50, y: 50 },
         { x: 200, y: 100 },
@@ -21,15 +21,19 @@ class Dimensions extends Component {
       ],
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handlePChange = this.handlePChange.bind(this);
     this.handleView = this.handleView.bind(this);
   }
 
   handleChange([v1, v2, v3]) {
-    console.log('values', v1, v2, v3);
     this.setState({ color: `#${v1}${v2}${v3}` });
   }
 
-  handleView(value) {
+  handlePChange(cordinates) {
+    this.setState({ point: cordinates });
+  }
+
+  handleView() {
     this.setState({ value: !this.state.value })
   }
 
@@ -54,6 +58,7 @@ class Dimensions extends Component {
           <FormViews
             value={this.state.value}
             handleChange={this.handleChange}
+            handlePChange={this.handlePChange}
           />
         </Col>
 
