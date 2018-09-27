@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
   Col, Form,
-  FormGroup, Input, Label,
+  FormGroup, InputGroup, InputGroupText,
+  InputGroupAddon, Input, Label, Table,
 } from 'reactstrap';
 
 class FormViews extends Component {
   static propTypes = {
-    value: PropTypes.bool.isRequired,
     handleChange: PropTypes.func.isRequired,
   }
 
@@ -35,7 +35,7 @@ class FormViews extends Component {
     const { colors } = this.state;
     if (value) {
       return (
-        <Form>
+        <Form className="mt-3">
           <FormGroup row>
             <Label sm={2}>Side A</Label>
             <Col sm={10}>
@@ -58,8 +58,70 @@ class FormViews extends Component {
       );
     }
     return (
-      <div>
-        <h2>This is the Second view</h2>
+      <div className="mt-3">
+        <Table borderless>
+          <thead>
+            <tr>
+              <th>Dot A</th>
+              <th>Dot B</th>
+              <th>Dot C</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <InputGroup>
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>X</InputGroupText>
+                  </InputGroupAddon>
+                  <Input type="number" min="0" />
+                </InputGroup>
+              </td>
+              <td>
+                <InputGroup>
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>X</InputGroupText>
+                  </InputGroupAddon>
+                  <Input type="number" min="0" />
+                </InputGroup>
+              </td>
+              <td>
+                <InputGroup>
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>X</InputGroupText>
+                  </InputGroupAddon>
+                  <Input type="number" min="0" />
+                </InputGroup>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <InputGroup>
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>Y</InputGroupText>
+                  </InputGroupAddon>
+                  <Input type="number" min="0" />
+                </InputGroup>
+              </td>
+              <td>
+                <InputGroup>
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>Y</InputGroupText>
+                  </InputGroupAddon>
+                  <Input type="number" min="0" />
+                </InputGroup>
+              </td>
+              <td>
+                <InputGroup>
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>Y</InputGroupText>
+                  </InputGroupAddon>
+                  <Input type="number" min="0" />
+                </InputGroup>
+              </td>
+            </tr>
+          </tbody>
+        </Table>
       </div>
     );
   }

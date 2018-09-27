@@ -11,3 +11,20 @@ body {
 .top-border {
   border-top: 1px solid silver;
 }
+
+.table thead {
+  background-color: rgba(0,0,0,.06);
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  border: 1px solid #b7bddd;
+  color: rgba(0,0,0,.44);
+}
+
+.table th, .table td {
+  border: 1px solid #b7bddd !important;
+  position: relative;
+  padding: 10px;
+}
