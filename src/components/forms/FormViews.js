@@ -8,7 +8,6 @@ import {
 class FormViews extends Component {
   static propTypes = {
     value: PropTypes.bool.isRequired,
-    min: PropTypes.number.isRequired,
     handleChange: PropTypes.func.isRequired,
   }
 
