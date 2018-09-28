@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   CardTitle, Col,
   Input, Row,
@@ -9,6 +10,10 @@ import FormViews from './FormViews';
 
 
 class Dimensions extends Component {
+  static propTypes = {
+    updateDimensions: PropTypes.func.isRequired,
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -29,8 +34,10 @@ class Dimensions extends Component {
     this.setState({ color: `#${v1}${v2}${v3}` });
   }
 
-  handlePChange(cordinates) {
-    this.setState({ point: cordinates });
+  handlePChange(coordinates) {
+    const { updateDimensions } = this.props;
+    this.setState({ point: coordinates });
+    updateDimensions(coordinates);
   }
 
   handleView() {
@@ -72,7 +79,6 @@ class Dimensions extends Component {
               ]
             }
             color={this.state.color}
-
           />
         </Stage>
       </Row>
