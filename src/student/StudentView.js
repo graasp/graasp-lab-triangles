@@ -21,13 +21,13 @@ class StudentView extends Component {
 
   updateDimensions1(coordinates) {
     this.setState({
-      coords1: coordinates
+      triA: coordinates
     });
   }
 
   updateDimensions2(coordinates) {
     this.setState({
-      coords2: coordinates,
+      triB: coordinates,
     });
   }
 
@@ -50,8 +50,8 @@ class StudentView extends Component {
             <Dimensions name="tri2" updateDimensions={this.updateDimensions2} />
           </Card>
           <SimulationButtons sets={{
-            coords1: this.state.coords1,
-            coords2: this.state.coords2
+            triA: this.state.triA,
+            triB: this.state.triB
           }}/>
         </Container>
       </div>
