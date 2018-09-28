@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
 import { Button, Row } from 'reactstrap';
-import PropTypes from 'prop-types';
 class SimulationButtons extends Component {
-  static propTypes = {
-    handleReset: PropTypes.func.isRequired,
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      coords: this.props.coords
+    };
   }
 
   handleResetChange = () => {
-    console.log('this is the Reset button:', this);
     const { handleReset } = this.props;
-    const coords = [{ x: 50000, y: 40 }, { x: 200, y: 100 }, { x: 100, y: 150 }];
-    handleReset(coords);
+    handleReset(this.state.coords);
   }
 
   handleSimulate = () => {
-    console.log('this is is The Simulation button:', this);
+    const { sets: {coords1, coords2} } = this.props;
+    console.log(coords1, coords2);
   }
 
   render() {
