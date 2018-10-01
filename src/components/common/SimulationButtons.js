@@ -7,6 +7,7 @@ class SimulationButtons extends Component {
     this.state = {
       coords: this.props.coords,
       visible: true,
+      low: true,
       success: {
         val: '',
         val1: '',
@@ -26,7 +27,7 @@ class SimulationButtons extends Component {
   }
 
   handleSimulate = () => {
-    const { sets: {triOne, triTwo} } = this.props;
+    const { triangles: { triOne, triTwo } } = this.props;
 
     // Getting Triangle ABC coordinates
     const xa = triOne[0].x;
@@ -76,17 +77,21 @@ class SimulationButtons extends Component {
     this.setState({ success: { val, val1, val2 } });
   }
 
+  handleMessage = (val, val1, val2) => {
+    if ((val == val1) == val2) {
+      return <Alert color="success" isOpen={this.state.visible} toggle={this.onDismiss}>Youpiii <span>😅</span>! Tri ABC and DEF are seemless</Alert>
+    }
+    return <Alert color="danger" isOpen={this.state.visible} toggle={this.onDismiss}>Ups Sorry <span>🌚</span>! Tri ABC and DEF are not seemless</Alert>
+  }
+
   render() {
     const { success } = this.state;
     const { val, val1, val2 } = success;
     return (
       <Row className="pt-5">
-        { ((val == val1) == val2) ?
-          <Alert color="success" isOpen={this.state.visible} toggle={this.onDismiss}>Youpiii <span>😅</span>! Tri ABC and DEF are seemless</Alert>
-          : <Alert color="danger" isOpen={this.state.visible} toggle={this.onDismiss}>Ups Sorry <span>🌚</span>! Tri ABC and DEF are not seemless</Alert>}
+        {this.handleMessage(val, val1, val2)}
         <div className="ml-auto">
-          <Button color="primary mr-3" onClick={this.handleResetChange}>Reset</Button>
-          <Button color="outline-secondary" onClick={this.handleSimulate}>Simulate</Button>
+          <Button color="outline-secondary" onClick={this.handleSimulate}>Compare Sides</Button>
         </div>
       </Row>
     );

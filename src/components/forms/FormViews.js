@@ -10,6 +10,7 @@ class FormViews extends Component {
   static propTypes = {
     handleChange: PropTypes.func.isRequired,
     handlePChange: PropTypes.func.isRequired,
+    handleAChange: PropTypes.func.isRequired,
   }
 
   state = {
@@ -18,6 +19,11 @@ class FormViews extends Component {
       '00',
       '00',
     ],
+    angles: {
+      A: 45,
+      B: 45,
+      C: 90,
+    },
     points: [
       { x: 40, y: 40 },
       { x: 200, y: 100 },
@@ -27,6 +33,7 @@ class FormViews extends Component {
 
   handleInputChange = (event) => {
     event.preventDefault();
+    console.log('Input is changing hehe', event.target.value);
     const { handleChange } = this.props;
     const { colors } = this.state;
     const { dataset: { index }, value } = event.target;
@@ -34,6 +41,18 @@ class FormViews extends Component {
     newColors[index] = value;
     this.setState({ colors: newColors });
     handleChange(newColors);
+  }
+
+  handleAngleChange = (event) => {
+    event.preventDefault();
+    console.log('Input is changing hehe', event.target.value);
+    const { handleAChange } = this.props;
+    const { angles } = this.state;
+    const { dataset: { index }, value } = event.target;
+    const newAngles = [...angles];
+    newAngles[index] = value;
+    this.setState({ angles: newAngles });
+    handleAChange(newAngles);
   }
 
   handlePointChange = (event) => {
@@ -51,16 +70,25 @@ class FormViews extends Component {
 
   render() {
     const { value, min, node } = this.props;
-    const { colors, points } = this.state;
+    const { angles, colors, points } = this.state;
     if (value) {
       return (
         <div className="mt-3">
           <Table borderless>
             <thead>
               <tr>
-                <th>Dot {node.A}</th>
-                <th>Dot {node.B}</th>
-                <th>Dot {node.C}</th>
+                <th>
+                  Dot
+                  {node.A}
+                </th>
+                <th>
+                  Dot
+                  {node.B}
+                </th>
+                <th>
+                  Dot
+                  {node.C}
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -124,21 +152,30 @@ class FormViews extends Component {
     return (
       <Form className="mt-3">
         <FormGroup row>
-          <Label sm={3}>Angle {node.A}</Label>
+          <Label sm={3}>
+            Angle&nbsp;
+            <strong>{node.A}</strong>
+          </Label>
           <Col sm={9}>
-            <Input name="" data-index="0" type="text" min={min} value={colors[0]} onChange={this.handleInputChange} placeholder="Side A size" />
+            <Input name="" data-index="0" type="text" min={min} value={angles.A} onChange={this.handleAngleChange} placeholder="Side A size" />
           </Col>
         </FormGroup>
         <FormGroup row>
-          <Label sm={3}>Angle {node.B}</Label>
+          <Label sm={3}>
+            Angle&nbsp;
+            <strong>{node.B}</strong>
+          </Label>
           <Col sm={9}>
-            <Input name="" data-index="1" type="text" value={colors[1]} onChange={this.handleInputChange} placeholder="Side B size" />
+            <Input name="" data-index="1" type="text" value={angles.B} onChange={this.handleAngleChange} placeholder="Side B size" />
           </Col>
         </FormGroup>
         <FormGroup row>
-          <Label sm={3}>Angle {node.C}</Label>
+          <Label sm={3}>
+            Angle&nbsp;
+            <strong>{node.C}</strong>
+          </Label>
           <Col sm={9}>
-            <Input name="" data-index="2" type="text" value={colors[2]} onChange={this.handleInputChange} placeholder="Side C size" />
+            <Input name="" data-index="2" type="text" value={angles.C} onChange={this.handleAngleChange} placeholder="Side C size" />
           </Col>
         </FormGroup>
       </Form>

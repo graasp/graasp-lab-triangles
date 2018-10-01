@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Alert, Card, Container } from 'reactstrap';
+import AngleButtons from '../components/common/AngleButtons';
 import SimulationButtons from '../components/common/SimulationButtons';
 import Dimensions from '../components/forms/Dimensions';
 import Logo from '../logo.svg';
@@ -10,6 +11,16 @@ class StudentView extends Component {
     this.state = {
       colorOne: 'blue',
       colorTwo: 'red',
+      angleOne: {
+        A: 30,
+        B: 60,
+        C: 90,
+      },
+      angleTwo: {
+        A: 20,
+        B: 80,
+        C: 80,
+      },
       triOne: [
         { x: 50, y: 50 },
         { x: 200, y: 100 },
@@ -66,7 +77,12 @@ class StudentView extends Component {
             <Dimensions name="triOne" updateDimensions={this.updateDimensionsOne} node={this.state.nodeOne} color={this.state.colorOne} />
             <Dimensions name="triTwo" updateDimensions={this.updateDimensionsTwo} node={this.state.nodeTwo} color={this.state.colorTwo} />
           </Card>
-          <SimulationButtons sets={{ triOne: this.state.triOne, triTwo: this.state.triTwo }} />
+          <SimulationButtons
+            triangles={{ triOne: this.state.triOne, triTwo: this.state.triTwo }}
+          />
+          <AngleButtons
+            angles={{ angleOne: this.state.angleOne, angleTwo: this.state.angleTwo }}
+          />
         </Container>
       </div>
     );
