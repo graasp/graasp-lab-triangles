@@ -18,7 +18,7 @@ class Dimensions extends Component {
     super(props);
     this.state = {
       value: true,
-      color: '#111111',
+      color: 'red',
       point: [
         { x: 50, y: 50 },
         { x: 200, y: 100 },
@@ -45,12 +45,12 @@ class Dimensions extends Component {
   }
 
   render() {
-    const { name } = this.props;
+    const { name, node, color } = this.props;
     return (
       <Row className="px-5">
         <Col md="6" className="right-border">
           <CardTitle>
-            <span>Triangle A dimensions here</span>
+            <span>Triangle <strong>{`${node.A}${node.B}${node.C}`}</strong> dimensions here</span>
           </CardTitle>
           <div className="clearfix">
             <span className="float-left">
@@ -66,6 +66,7 @@ class Dimensions extends Component {
             value={this.state.value}
             handleChange={this.handleChange}
             handlePChange={this.handlePChange}
+            node={node}
           />
         </Col>
 
@@ -78,7 +79,7 @@ class Dimensions extends Component {
                 { x: this.state.point[2].x, y: this.state.point[2].y }
               ]
             }
-            color={this.state.color}
+            color={color}
           />
         </Stage>
       </Row>
