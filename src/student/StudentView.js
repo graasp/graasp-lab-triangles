@@ -8,26 +8,43 @@ class StudentView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      coords: [
+      colorOne: 'blue',
+      colorTwo: 'red',
+      triOne: [
         { x: 50, y: 50 },
         { x: 200, y: 100 },
         { x: 100, y: 150 },
       ],
+      triTwo: [
+        { x: 50, y: 50 },
+        { x: 200, y: 100 },
+        { x: 100, y: 150 },
+      ],
+      nodeOne: {
+        A: 'A',
+        B: 'B',
+        C: 'C',
+      },
+      nodeTwo: {
+        A: 'D',
+        B: 'E',
+        C: 'F',
+      },
     };
 
-    this.updateDimensions1 = this.updateDimensions1.bind(this);
-    this.updateDimensions2 = this.updateDimensions2.bind(this);
+    this.updateDimensionsOne = this.updateDimensionsOne.bind(this);
+    this.updateDimensionsTwo = this.updateDimensionsTwo.bind(this);
   }
 
-  updateDimensions1(coordinates) {
+  updateDimensionsOne(coordinates) {
     this.setState({
-      triA: coordinates
+      triOne: coordinates,
     });
   }
 
-  updateDimensions2(coordinates) {
+  updateDimensionsTwo(coordinates) {
     this.setState({
-      triB: coordinates,
+      triTwo: coordinates,
     });
   }
 
@@ -46,13 +63,10 @@ class StudentView extends Component {
             </a>
           </Alert>
           <Card body>
-            <Dimensions name="tri1" updateDimensions={this.updateDimensions1} />
-            <Dimensions name="tri2" updateDimensions={this.updateDimensions2} />
+            <Dimensions name="triOne" updateDimensions={this.updateDimensionsOne} node={this.state.nodeOne} color={this.state.colorOne} />
+            <Dimensions name="triTwo" updateDimensions={this.updateDimensionsTwo} node={this.state.nodeTwo} color={this.state.colorTwo} />
           </Card>
-          <SimulationButtons sets={{
-            triA: this.state.triA,
-            triB: this.state.triB
-          }}/>
+          <SimulationButtons sets={{ triOne: this.state.triOne, triTwo: this.state.triTwo }} />
         </Container>
       </div>
     );
