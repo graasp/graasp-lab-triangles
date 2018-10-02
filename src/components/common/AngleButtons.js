@@ -30,7 +30,7 @@ class AngleButtons extends Component {
     console.log('angaangaanga', anga);
     console.log('angaprimangaprim', angaprim);
     if (anga === angaprim && angb === angbprim && angc === angcprim) {
-      console.log('Youpiiii angle A et Aprim sont egaux');
+      console.log('Youpiiii les Triangle ABC et ABCprim sont semblables par angles egaux');
     } else {
       console.log('Ups! Desole, ils sont pas semblables ces angles');
     }

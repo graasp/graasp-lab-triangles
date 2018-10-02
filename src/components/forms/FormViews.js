@@ -8,17 +8,11 @@ import {
 
 class FormViews extends Component {
   static propTypes = {
-    handleChange: PropTypes.func.isRequired,
     handlePChange: PropTypes.func.isRequired,
     handleAChange: PropTypes.func.isRequired,
   }
 
   state = {
-    colors: [
-      '00',
-      '00',
-      '00',
-    ],
     angles: {
       A: 45,
       B: 45,
@@ -31,34 +25,20 @@ class FormViews extends Component {
     ],
   }
 
-  handleInputChange = (event) => {
-    event.preventDefault();
-    console.log('Input is changing hehe', event.target.value);
-    const { handleChange } = this.props;
-    const { colors } = this.state;
-    const { dataset: { index }, value } = event.target;
-    const newColors = [...colors];
-    newColors[index] = value;
-    this.setState({ colors: newColors });
-    handleChange(newColors);
-  }
-
   handleAngleChange = (event) => {
     event.preventDefault();
-    console.log('Input is changing hehe', event.target.value);
     const { handleAChange } = this.props;
     const { angles } = this.state;
-    const { dataset: { index }, value } = event.target;
-    const newAngles = [...angles];
-    newAngles[index] = value;
-    this.setState({ angles: newAngles });
-    handleAChange(newAngles);
+    const { dataset: { index, angle }, value } = event.target;
+    angles[angle] = Number.parseInt(value, 10);
+    this.setState({ angles });
+    handleAChange(angles);
   }
 
   handlePointChange = (event) => {
     event.preventDefault();
     if (event.target.value === '') {
-      event.target.value = 0
+      event.target.value = 0;
     }
     const { handlePChange } = this.props;
     const { points } = this.state;
@@ -157,7 +137,7 @@ class FormViews extends Component {
             <strong>{node.A}</strong>
           </Label>
           <Col sm={9}>
-            <Input name="" data-index="0" type="text" min={min} value={angles.A} onChange={this.handleAngleChange} placeholder="Side A size" />
+            <Input name="" data-index="0" type="number" data-angle="A" value={angles.A} onChange={this.handleAngleChange} placeholder="Angle A value" />
           </Col>
         </FormGroup>
         <FormGroup row>
@@ -166,7 +146,7 @@ class FormViews extends Component {
             <strong>{node.B}</strong>
           </Label>
           <Col sm={9}>
-            <Input name="" data-index="1" type="text" value={angles.B} onChange={this.handleAngleChange} placeholder="Side B size" />
+            <Input name="" data-index="1" type="number" data-angle="B" value={angles.B} onChange={this.handleAngleChange} placeholder="Angle B value" />
           </Col>
         </FormGroup>
         <FormGroup row>
@@ -175,7 +155,7 @@ class FormViews extends Component {
             <strong>{node.C}</strong>
           </Label>
           <Col sm={9}>
-            <Input name="" data-index="2" type="text" value={angles.C} onChange={this.handleAngleChange} placeholder="Side C size" />
+            <Input name="" data-index="2" type="number" data-angle="C" value={angles.C} onChange={this.handleAngleChange} placeholder="Side C size" />
           </Col>
         </FormGroup>
       </Form>

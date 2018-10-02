@@ -17,9 +17,9 @@ class StudentView extends Component {
         C: 90,
       },
       angleTwo: {
-        A: 20,
-        B: 80,
-        C: 80,
+        A: 30,
+        B: 60,
+        C: 90,
       },
       triOne: [
         { x: 50, y: 50 },
@@ -45,11 +45,25 @@ class StudentView extends Component {
 
     this.updateDimensionsOne = this.updateDimensionsOne.bind(this);
     this.updateDimensionsTwo = this.updateDimensionsTwo.bind(this);
+    this.updateAngleOne = this.updateAngleOne.bind(this);
+    this.updateAngleTwo = this.updateAngleTwo.bind(this);
   }
 
   updateDimensionsOne(coordinates) {
     this.setState({
       triOne: coordinates,
+    });
+  }
+
+  updateAngleOne(angles) {
+    this.setState({
+      angleOne: angles,
+    });
+  }
+
+  updateAngleTwo(angles) {
+    this.setState({
+      angleTwo: angles,
     });
   }
 
@@ -74,8 +88,8 @@ class StudentView extends Component {
             </a>
           </Alert>
           <Card body>
-            <Dimensions name="triOne" updateDimensions={this.updateDimensionsOne} node={this.state.nodeOne} color={this.state.colorOne} />
-            <Dimensions name="triTwo" updateDimensions={this.updateDimensionsTwo} node={this.state.nodeTwo} color={this.state.colorTwo} />
+            <Dimensions name="triOne" updateDimensions={this.updateDimensionsOne} node={this.state.nodeOne} color={this.state.colorOne} updateAngles={this.updateAngleOne} />
+            <Dimensions name="triTwo" updateDimensions={this.updateDimensionsTwo} node={this.state.nodeTwo} color={this.state.colorTwo} updateAngles={this.updateAngleTwo} />
           </Card>
           <SimulationButtons
             triangles={{ triOne: this.state.triOne, triTwo: this.state.triTwo }}

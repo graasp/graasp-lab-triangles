@@ -12,32 +12,34 @@ import FormViews from './FormViews';
 class Dimensions extends Component {
   static propTypes = {
     updateDimensions: PropTypes.func.isRequired,
+    updateAngles: PropTypes.func.isRequired,
   }
 
   constructor(props) {
     super(props);
     this.state = {
       value: true,
-      color: 'red',
       point: [
         { x: 50, y: 50 },
         { x: 200, y: 100 },
         { x: 100, y: 150 },
       ],
     };
-    this.handleChange = this.handleChange.bind(this);
+    this.handleAChange = this.handleAChange.bind(this);
     this.handlePChange = this.handlePChange.bind(this);
     this.handleView = this.handleView.bind(this);
-  }
-
-  handleChange([v1, v2, v3]) {
-    this.setState({ color: `#${v1}${v2}${v3}` });
   }
 
   handlePChange(coordinates) {
     const { updateDimensions } = this.props;
     this.setState({ point: coordinates });
     updateDimensions(coordinates);
+  }
+
+  handleAChange(angles) {
+    const { updateAngles } = this.props;
+    this.setState({ angles: angles });
+    updateAngles(angles);
   }
 
   handleView() {
@@ -64,8 +66,8 @@ class Dimensions extends Component {
           </div>
           <FormViews
             value={this.state.value}
-            handleChange={this.handleChange}
             handlePChange={this.handlePChange}
+            handleAChange={this.handleAChange}
             node={node}
           />
         </Col>
