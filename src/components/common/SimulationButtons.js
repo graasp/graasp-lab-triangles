@@ -7,11 +7,10 @@ class SimulationButtons extends Component {
     this.state = {
       coords: this.props.coords,
       visible: true,
-      low: true,
       success: {
-        val: '',
-        val1: '',
-        val2: '',
+        value1: '',
+        value2: '',
+        value3: '',
       },
     };
     this.onDismiss = this.onDismiss.bind(this);
@@ -71,14 +70,14 @@ class SimulationButtons extends Component {
     const dBCprim = Math.trunc(Math.sqrt((xcprim - xbprim)
     * (xcprim - xbprim))) + Math.trunc(Math.sqrt((ycprim - ybprim) * (ycprim - ybprim)));
     // Calculation side compareason
-    const val = dAB / dABprim;
-    const val1 = dAC / dACprim;
-    const val2 = dBC / dBCprim;
-    this.setState({ success: { val, val1, val2 } });
+    const value1 = Math.trunc(dAB / dABprim);
+    const value2 = Math.trunc(dAC / dACprim);
+    const value3 = Math.trunc(dBC / dBCprim);
+    this.setState({ success: { value1, value2, value3 } });
   }
 
-  handleMessage = (val, val1, val2) => {
-    if ((val == val1) == val2) {
+  handleMessage = (value1, value2, value3) => {
+    if ((value1 == value2) == value3) {
       return <Alert color="success" isOpen={this.state.visible} toggle={this.onDismiss}>Youpiii <span>😅</span>! Tri ABC and DEF are seemless</Alert>
     }
     return <Alert color="danger" isOpen={this.state.visible} toggle={this.onDismiss}>Ups Sorry <span>🌚</span>! Tri ABC and DEF are not seemless</Alert>
@@ -86,10 +85,10 @@ class SimulationButtons extends Component {
 
   render() {
     const { success } = this.state;
-    const { val, val1, val2 } = success;
+    const { value1, value2, value3 } = success;
     return (
       <Row className="pt-5">
-        {this.handleMessage(val, val1, val2)}
+        {this.handleMessage(value1, value2, value3)}
         <div className="ml-auto">
           <Button color="outline-secondary" onClick={this.handleSimulate}>Compare Sides</Button>
         </div>
