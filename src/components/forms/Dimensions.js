@@ -13,6 +13,9 @@ class Dimensions extends Component {
   static propTypes = {
     updateDimensions: PropTypes.func.isRequired,
     updateAngles: PropTypes.func.isRequired,
+    name: PropTypes.string.isRequired,
+    node: PropTypes.object.isRequired,
+    color: PropTypes.string.isRequired,
   }
 
   constructor(props) {
@@ -43,20 +46,26 @@ class Dimensions extends Component {
   }
 
   handleView() {
-    this.setState({ value: !this.state.value })
+    const { value } = this.state;
+    this.setState({ value: !value });
   }
 
   render() {
+    const { point, value } = this.state;
     const { name, node, color } = this.props;
     return (
       <Row className="px-5">
         <Col md="6" className="right-border">
           <CardTitle>
-            <span>Triangle <strong>{`${node.A}${node.B}${node.C}`}</strong> dimensions here</span>
+            <span>
+              Triangle
+              <strong>{`${node.A}${node.B}${node.C}`}</strong>
+              dimensions here
+            </span>
           </CardTitle>
           <div className="clearfix">
             <span className="float-left">
-              <Input name={`${name}-choice`} type="radio" checked={this.state.value} onChange={this.handleView} />
+              <Input name={`${name}-choice`} type="radio" checked={value} onChange={this.handleView} />
               &nbsp;Use Sides
             </span>
             <span className="float-right">
@@ -65,7 +74,7 @@ class Dimensions extends Component {
             </span>
           </div>
           <FormViews
-            value={this.state.value}
+            value={value}
             handlePChange={this.handlePChange}
             handleAChange={this.handleAChange}
             node={node}
@@ -76,9 +85,9 @@ class Dimensions extends Component {
           <Tri
             points={
               [
-                { x: this.state.point[0].x, y: this.state.point[0].y },
-                { x: this.state.point[1].x, y: this.state.point[1].y },
-                { x: this.state.point[2].x, y: this.state.point[2].y }
+                { x: point[0].x, y: point[0].y },
+                { x: point[1].x, y: point[1].y },
+                { x: point[2].x, y: point[2].y },
               ]
             }
             color={color}

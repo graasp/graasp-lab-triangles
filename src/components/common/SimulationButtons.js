@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import { Alert, Button, Row } from 'reactstrap';
 
 class SimulationButtons extends Component {
+  static propTypes: {
+    triangles: React.PropTypes.object.isRequired
+  }
+
   constructor(props) {
     super(props);
     this.state = {
-      coords: this.props.coords,
       visible: true,
       success: {
         value1: '',
@@ -18,11 +21,6 @@ class SimulationButtons extends Component {
 
   onDismiss() {
     this.setState({ visible: false });
-  }
-
-  handleResetChange = () => {
-    const { handleReset } = this.props;
-    handleReset(this.state.coords);
   }
 
   handleSimulate = () => {
@@ -77,10 +75,21 @@ class SimulationButtons extends Component {
   }
 
   handleMessage = (value1, value2, value3) => {
+    const { visible } = this.state;
     if ((value1 == value2) == value3) {
-      return <Alert color="success" isOpen={this.state.visible} toggle={this.onDismiss}>Youpiii <span>😅</span>! Tri ABC and DEF are seemless</Alert>
+      return (
+        <Alert color="success" isOpen={visible} toggle={this.onDismiss}>
+          Triangles ABC and DEF are&nbsp;
+          <strong>Similar</strong>
+        </Alert>
+      );
     }
-    return <Alert color="danger" isOpen={this.state.visible} toggle={this.onDismiss}>Ups Sorry <span>🌚</span>! Tri ABC and DEF are not seemless</Alert>
+    return (
+      <Alert color="danger" isOpen={visible} toggle={this.onDismiss}>
+        The triangles ABC and DEF are not&nbsp;
+        <strong>Similar</strong>
+      </Alert>
+    );
   }
 
   render() {
