@@ -90,7 +90,6 @@ class SimulationButtons extends Component {
 
   handleMessage = (value1, value2, value3) => {
     const { visible } = this.state;
-    console.log(value1, value2, value3);
     if (value1 === value2 && value2 === value3) {
       return (
         <Alert color="success" isOpen={visible} toggle={this.onDismiss}>

@@ -7,6 +7,10 @@ body {
 .konvajs-content {
   margin-left: auto;
   margin-right: auto;
+  -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
 }
 
 .right-border {

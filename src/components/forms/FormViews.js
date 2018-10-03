@@ -28,8 +28,48 @@ class FormViews extends Component {
     const { points } = this.state;
     const { dataset: { index, axis }, value } = event.target;
     const newPoints = [...points];
+    console.log('newPoints', newPoints);
     newPoints[index][axis] = Number.parseInt(value, 10);
     handlePChange(newPoints);
+  }
+
+  handleShiftRight = () => {
+    const { handlePChange } = this.props;
+    const { points } = this.state;
+    const newPoints = [...points];
+    for (let i = 0; i < newPoints.length; i++) {
+      newPoints[i].x += 20;
+      console.log('newPoints[i].x', newPoints[i].x);
+    }
+    handlePChange(newPoints);
+  }
+
+  handleShiftLeft = () => {
+    const { handlePChange } = this.props;
+    const { points } = this.state;
+    const newPoints = [...points];
+    for (let i = 0; i < newPoints.length; i++) {
+      newPoints[i].x -= 20;
+      console.log('newPoints[i].x', newPoints[i].x);
+    }
+    handlePChange(newPoints);
+  }
+
+  handleRotate = () => {
+    const elm = document.querySelectorAll('.konvajs-content');
+    let rotated = false;
+    const deg = rotated ? 0 : 60;
+    for (let i = 0; i < elm.length; i++) {
+      console.log('deg', deg);
+      elm[i].style.webkitTransform = 'rotate('+deg+'deg)';
+      elm[i].style.mozTransform    = 'rotate('+deg+'deg)';
+      elm[i].style.msTransform     = 'rotate('+deg+'deg)';
+      elm[i].style.oTransform      = 'rotate('+deg+'deg)';
+      elm[i].style.transform       = 'rotate('+deg+'deg)';
+    }
+    rotated = !rotated;
+
+    console.log('Rotation clicked', elm);
   }
 
   render() {
@@ -109,9 +149,9 @@ class FormViews extends Component {
             </tr>
           </tbody>
         </Table>
-        <Button color="success" size="sm">Shift-Left</Button>
-        <Button color="outline-warning" size="sm" className="ml-3 mr-3">Rotate</Button>
-        <Button color="success" size="sm">Shift-Right</Button>
+        <Button color="success" size="sm" onClick={this.handleShiftLeft}>Shift-Left</Button>
+        <Button color="outline-warning" size="sm" className="ml-3 mr-3" onClick={this.handleRotate}>Rotate</Button>
+        <Button color="success" size="sm" onClick={this.handleShiftRight}>Shift-Right</Button>
       </div>
     );
   }
