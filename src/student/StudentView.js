@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { Alert, Card, Container } from 'reactstrap';
-import AngleButtons from '../components/common/AngleButtons';
+import { Card, Container } from 'reactstrap';
 import SimulationButtons from '../components/common/SimulationButtons';
 import Dimensions from '../components/forms/Dimensions';
-import Logo from '../logo.svg';
 
 class StudentView extends Component {
   constructor(props) {
@@ -11,16 +9,6 @@ class StudentView extends Component {
     this.state = {
       colorOne: 'blue',
       colorTwo: 'red',
-      angleOne: {
-        A: 30,
-        B: 60,
-        C: 90,
-      },
-      angleTwo: {
-        A: 30,
-        B: 60,
-        C: 90,
-      },
       triOne: [
         { x: 50, y: 50 },
         { x: 200, y: 100 },
@@ -45,25 +33,11 @@ class StudentView extends Component {
 
     this.updateDimensionsOne = this.updateDimensionsOne.bind(this);
     this.updateDimensionsTwo = this.updateDimensionsTwo.bind(this);
-    this.updateAngleOne = this.updateAngleOne.bind(this);
-    this.updateAngleTwo = this.updateAngleTwo.bind(this);
   }
 
   updateDimensionsOne(coordinates) {
     this.setState({
       triOne: coordinates,
-    });
-  }
-
-  updateAngleOne(angles) {
-    this.setState({
-      angleOne: angles,
-    });
-  }
-
-  updateAngleTwo(angles) {
-    this.setState({
-      angleTwo: angles,
     });
   }
 
@@ -74,28 +48,19 @@ class StudentView extends Component {
   }
 
   render() {
+    const {
+      triOne, triTwo, nodeOne,
+      nodeTwo, colorOne, colorTwo,
+    } = this.state;
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={Logo} className="App-logo" alt="Logo" />
-          <h1 className="App-title">Welcome to the Graasp App Starter Kit</h1>
-        </header>
         <Container className="App-body">
-          <Alert color="info">
-            This is the student view. Switch to the teacher view by clicking on the URL below.
-            <a href="?mode=teacher">
-              <pre>{`${window.location.host}/?mode=teacher`}</pre>
-            </a>
-          </Alert>
-          <Card body>
-            <Dimensions name="triOne" updateDimensions={this.updateDimensionsOne} node={this.state.nodeOne} color={this.state.colorOne} updateAngles={this.updateAngleOne} />
-            <Dimensions name="triTwo" updateDimensions={this.updateDimensionsTwo} node={this.state.nodeTwo} color={this.state.colorTwo} updateAngles={this.updateAngleTwo} />
+          <Card body className="bg-info mt-5">
+            <Dimensions name="triOne" updateDimensions={this.updateDimensionsOne} node={nodeOne} color={colorOne} />
+            <Dimensions name="triTwo" updateDimensions={this.updateDimensionsTwo} node={nodeTwo} color={colorTwo} />
           </Card>
           <SimulationButtons
-            triangles={{ triOne: this.state.triOne, triTwo: this.state.triTwo }}
-          />
-          <AngleButtons
-            angles={{ angleOne: this.state.angleOne, angleTwo: this.state.angleTwo }}
+            triangles={{ triOne: triOne, triTwo: triTwo }}
           />
         </Container>
       </div>
