@@ -58,8 +58,8 @@ class Dimensions extends Component {
         <Col md="6" className="right-border">
           <CardTitle>
             <span>
-              Triangle
-              <strong>{`${node.A}${node.B}${node.C}`}</strong>
+              Triangle&nbsp;
+              <strong>{`${node.A}${node.B}${node.C}`}</strong>&nbsp;
               dimensions here
             </span>
           </CardTitle>
