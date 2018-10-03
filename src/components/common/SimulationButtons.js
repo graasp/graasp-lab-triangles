@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Alert, Button, Row } from 'reactstrap';
+import PropTypes from 'prop-types';
 
 class SimulationButtons extends Component {
   static propTypes: {
-    triangles: React.PropTypes.object.isRequired
+    triangles: PropTypes.object.isRequired,
   }
 
   constructor(props) {
@@ -79,14 +80,22 @@ class SimulationButtons extends Component {
     if ((value1 == value2) == value3) {
       return (
         <Alert color="success" isOpen={visible} toggle={this.onDismiss}>
-          Triangles ABC and DEF are&nbsp;
+          Triangles&nbsp;
+          <strong>ABC</strong>
+          &nbsp;and&nbsp;
+          <strong>DEF</strong>
+          &nbsp;are&nbsp;
           <strong>Similar</strong>
         </Alert>
       );
     }
     return (
       <Alert color="danger" isOpen={visible} toggle={this.onDismiss}>
-        The triangles ABC and DEF are not&nbsp;
+        Triangles&nbsp;
+        <strong>ABC</strong>
+        &nbsp;and&nbsp;
+        <strong>DEF</strong>
+        &nbsp;are not &nbsp;
         <strong>Similar</strong>
       </Alert>
     );

@@ -8,7 +8,6 @@ import { Stage } from 'react-konva';
 import Tri from '../preview/Tri';
 import FormViews from './FormViews';
 
-
 class Dimensions extends Component {
   static propTypes = {
     updateDimensions: PropTypes.func.isRequired,
@@ -41,7 +40,7 @@ class Dimensions extends Component {
 
   handleAChange(angles) {
     const { updateAngles } = this.props;
-    this.setState({ angles: angles });
+    this.setState({ angles });
     updateAngles(angles);
   }
 
@@ -59,7 +58,8 @@ class Dimensions extends Component {
           <CardTitle>
             <span>
               Triangle&nbsp;
-              <strong>{`${node.A}${node.B}${node.C}`}</strong>&nbsp;
+              <strong>{`${node.A}${node.B}${node.C}`}</strong>
+              &nbsp;
               dimensions here
             </span>
           </CardTitle>

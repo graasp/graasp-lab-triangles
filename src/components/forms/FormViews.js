@@ -10,6 +10,8 @@ class FormViews extends Component {
   static propTypes = {
     handlePChange: PropTypes.func.isRequired,
     handleAChange: PropTypes.func.isRequired,
+    value: PropTypes.bool.isRequired,
+    node: PropTypes.object.isRequired,
   }
 
   state = {
@@ -49,8 +51,8 @@ class FormViews extends Component {
   }
 
   render() {
-    const { value, min, node } = this.props;
-    const { angles, colors, points } = this.state;
+    const { value, node } = this.props;
+    const { angles, points } = this.state;
     if (value) {
       return (
         <div className="mt-3">
