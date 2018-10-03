@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  CardTitle, Col,
-  Input, Row,
+  CardTitle, Col, Row,
 } from 'reactstrap';
 import { Stage } from 'react-konva';
 import Tri from '../preview/Tri';
@@ -11,8 +10,6 @@ import FormViews from './FormViews';
 class Dimensions extends Component {
   static propTypes = {
     updateDimensions: PropTypes.func.isRequired,
-    updateAngles: PropTypes.func.isRequired,
-    name: PropTypes.string.isRequired,
     node: PropTypes.object.isRequired,
     color: PropTypes.string.isRequired,
   }
@@ -27,7 +24,6 @@ class Dimensions extends Component {
         { x: 100, y: 150 },
       ],
     };
-    this.handleAChange = this.handleAChange.bind(this);
     this.handlePChange = this.handlePChange.bind(this);
     this.handleView = this.handleView.bind(this);
   }
@@ -38,12 +34,6 @@ class Dimensions extends Component {
     updateDimensions(coordinates);
   }
 
-  handleAChange(angles) {
-    const { updateAngles } = this.props;
-    this.setState({ angles });
-    updateAngles(angles);
-  }
-
   handleView() {
     const { value } = this.state;
     this.setState({ value: !value });
@@ -51,7 +41,7 @@ class Dimensions extends Component {
 
   render() {
     const { point, value } = this.state;
-    const { name, node, color } = this.props;
+    const { node, color } = this.props;
     return (
       <Row className="px-5">
         <Col md="6" className="right-border">
@@ -60,23 +50,12 @@ class Dimensions extends Component {
               Triangle&nbsp;
               <strong>{`${node.A}${node.B}${node.C}`}</strong>
               &nbsp;
-              dimensions here
+              coordinates
             </span>
           </CardTitle>
-          <div className="clearfix">
-            <span className="float-left">
-              <Input name={`${name}-choice`} type="radio" checked={value} onChange={this.handleView} />
-              &nbsp;Use Sides
-            </span>
-            <span className="float-right">
-              <Input name={`${name}-choice`} type="radio" onChange={this.handleView} />
-              &nbsp;Use Angles
-            </span>
-          </div>
           <FormViews
             value={value}
             handlePChange={this.handlePChange}
-            handleAChange={this.handleAChange}
             node={node}
           />
         </Col>
