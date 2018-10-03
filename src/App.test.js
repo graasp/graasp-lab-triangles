@@ -7,6 +7,8 @@ it('renders without crashing', () => {
   ReactDOM.render(<App />, div);
 
   expect(div.innerHTML).toContain('Triangle');
+  expect(div.innerHTML).toContain('Use Sides');
+  expect(div.innerHTML).toContain('Use Angle');
 
   ReactDOM.unmountComponentAtNode(div);
 });

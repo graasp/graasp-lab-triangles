@@ -31,7 +31,7 @@ class FormViews extends Component {
     event.preventDefault();
     const { handleAChange } = this.props;
     const { angles } = this.state;
-    const { dataset: { index, angle }, value } = event.target;
+    const { dataset: { angle }, value } = event.target;
     angles[angle] = Number.parseInt(value, 10);
     this.setState({ angles });
     handleAChange(angles);
