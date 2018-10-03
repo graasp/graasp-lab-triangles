@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Alert, Button, Row } from 'reactstrap';
 import PropTypes from 'prop-types';
+import Big from 'big.js';
 
 class SimulationButtons extends Component {
   static propTypes: {
@@ -37,16 +38,19 @@ class SimulationButtons extends Component {
 
     // Calculating triangle ABC distances
     // Calculating xAB and yAB
-    const dAB = Math.trunc(Math.sqrt((xb - xa) * (xb - xa)))
-    + Math.trunc(Math.sqrt((yb - ya) * (yb - ya)));
+    const r = new Big(xb).minus(xa);
+    const s = new Big(yb).minus(ya);
+    const dAB = r.pow(2).plus(s.pow(2)).sqrt();
 
     // Calculating xAC and yAC
-    const dAC = Math.trunc(Math.sqrt((xc - xa) * (xc - xa)))
-    + Math.trunc(Math.sqrt((yc - ya) * (yc - ya)));
+    const t = new Big(xc).minus(xa);
+    const u = new Big(yc).minus(ya);
+    const dAC = t.pow(2).plus(u.pow(2)).sqrt();
 
     // Calculating xBC and yBC
-    const dBC = Math.trunc(Math.sqrt((xc - xb) * (xc - xb)))
-    + Math.trunc(Math.sqrt((yc - yb) * (yc - yb)));
+    const v = new Big(xc).minus(xb);
+    const w = new Big(yc).minus(yb);
+    const dBC = v.pow(2).plus(w.pow(2)).sqrt();
 
     // Getting Triangle A`B`C` coordinates
     const xaprim = triTwo[0].x;
@@ -58,26 +62,36 @@ class SimulationButtons extends Component {
 
     // Calculating triangle A`B`C` distances
     // Calculating xA`B` and yA`B`
-    const dABprim = Math.trunc(Math.sqrt((xbprim - xaprim)
-    * (xbprim - xaprim))) + Math.trunc(Math.sqrt(((ybprim - yaprim) * (ybprim - yaprim))));
+    const x = new Big(xbprim).minus(xaprim);
+    const y = new Big(ybprim).minus(yaprim);
+    const dABprim = x.pow(2).plus(y.pow(2)).sqrt();
 
     // Calculating xAC and yAC
-    const dACprim = Math.trunc(Math.sqrt((xcprim - xaprim)
-    * (xcprim - xaprim))) + Math.trunc(Math.sqrt((ycprim - yaprim) * (ycprim - yaprim)));
+    const i = new Big(xcprim).minus(xaprim);
+    const j = new Big(ycprim).minus(yaprim);
+    const dACprim = i.pow(2).plus(j.pow(2)).sqrt();
 
     // Calculating xBC and yBC
-    const dBCprim = Math.trunc(Math.sqrt((xcprim - xbprim)
-    * (xcprim - xbprim))) + Math.trunc(Math.sqrt((ycprim - ybprim) * (ycprim - ybprim)));
+    const k = new Big(xcprim).minus(xbprim);
+    const l = new Big(ycprim).minus(ybprim);
+    const dBCprim = k.pow(2).plus(l.pow(2)).sqrt();
     // Calculation side compareason
-    const value1 = Math.trunc(dAB / dABprim);
-    const value2 = Math.trunc(dAC / dACprim);
-    const value3 = Math.trunc(dBC / dBCprim);
-    this.setState({ success: { value1, value2, value3 } });
+    const value1 = dAB.div(dABprim);
+    const value2 = dAC.div(dACprim);
+    const value3 = dBC.div(dBCprim);
+    console.log('3 sides values', value1.toString(), value2.toString(), value3.toString());
+    this.setState({ success: {
+      value1: value1.toString(),
+      value2: value2.toString(),
+      value3: value3.toString(),
+    },
+    });
   }
 
   handleMessage = (value1, value2, value3) => {
     const { visible } = this.state;
-    if ((value1 == value2) == value3) {
+    console.log(value1, value2, value3);
+    if (value1 === value2 && value2 === value3) {
       return (
         <Alert color="success" isOpen={visible} toggle={this.onDismiss}>
           Triangles&nbsp;
@@ -108,7 +122,7 @@ class SimulationButtons extends Component {
       <Row className="pt-5">
         {this.handleMessage(value1, value2, value3)}
         <div className="ml-auto">
-          <Button color="outline-secondary" onClick={this.handleSimulate}>Compare Sides</Button>
+          <Button color="outline-secondary" onClick={this.handleSimulate}>Compare</Button>
         </div>
       </Row>
     );
