@@ -8,6 +8,7 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "big.js": "5.1.2",
     "bootstrap": "4.1.3",
     "konva": "2.4.0",
     "prop-types": "15.6.2",
