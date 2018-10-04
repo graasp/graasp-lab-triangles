@@ -12,12 +12,9 @@ class FormViews extends Component {
   }
 
   state = {
-    points: [
-      { x: 40, y: 40 },
-      { x: 200, y: 100 },
-      { x: 100, y: 150 },
-    ],
+    flashed: this.props.flashed,
     rotated: false,
+    points: this.props.point,
   }
 
   handlePointChange = (event) => {
@@ -34,6 +31,7 @@ class FormViews extends Component {
     const newPoints = [...points];
     newPoints[index][axis] = Number.parseInt(value, 10);
     handlePChange(newPoints);
+    this.setState({ flashed: false })
   }
 
   handleShiftRight = () => {
@@ -53,16 +51,15 @@ class FormViews extends Component {
     const { points } = this.state;
     const newPoints = [...points];
     for (let i = 0; i < newPoints.length; i++) {
-      if (newPoints[i].x > 0) {
+      if (newPoints[i].x > 20 && newPoints[i].x < 300) {
+        console.log('newPoints[i].x', newPoints[i].x);
         newPoints[i].x -= 20;
         handlePChange(newPoints);
       }
     }
-    handlePChange(newPoints);
   }
 
   handleRotate = (event) => {
-    console.log('event', event.target);
     const elm = document.querySelectorAll('.konvajs-content');
     const { rotated } = this.state;
     const deg = rotated ? 0 : 180;
@@ -79,7 +76,7 @@ class FormViews extends Component {
 
   render() {
     const { node } = this.props;
-    const { rotated, points } = this.state;
+    const { rotated, points, flashed } = this.state;
     return (
       <div className="mt-3">
         <Table borderless>
