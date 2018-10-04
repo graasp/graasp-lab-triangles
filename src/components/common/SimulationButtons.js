@@ -5,12 +5,14 @@ import Big from 'big.js';
 
 class SimulationButtons extends Component {
   static propTypes: {
+    flashed: PropTypes.bool.isRequired,
     triangles: PropTypes.object.isRequired,
   }
 
   constructor(props) {
     super(props);
     this.state = {
+      flashed: this.props.flashed,
       visible: true,
       success: {
         value1: '',
@@ -80,11 +82,13 @@ class SimulationButtons extends Component {
     const value2 = dAC.div(dACprim);
     const value3 = dBC.div(dBCprim);
     console.log('3 sides values', value1.toString(), value2.toString(), value3.toString());
-    this.setState({ success: {
-      value1: value1.toString(),
-      value2: value2.toString(),
-      value3: value3.toString(),
-    },
+    this.setState({
+      success: {
+        value1: value1.toString(),
+        value2: value2.toString(),
+        value3: value3.toString(),
+      },
+      flashed: true,
     });
   }
 
@@ -115,13 +119,13 @@ class SimulationButtons extends Component {
   }
 
   render() {
-    const { success } = this.state;
+    const { success, flashed } = this.state;
     const { value1, value2, value3 } = success;
     return (
       <Row className="pt-5">
-        {this.handleMessage(value1, value2, value3)}
+        {flashed ? this.handleMessage(value1, value2, value3) : ''}
         <div className="ml-auto">
-          <Button color="outline-secondary" onClick={this.handleSimulate}>Compare</Button>
+          <Button color="info" onClick={this.handleSimulate}>Compare</Button>
         </div>
       </Row>
     );
