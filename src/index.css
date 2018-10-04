@@ -19,10 +19,12 @@ body {
 
 .right-border + div {
   width: 50%;
+  padding: 5px;
 }
 
-.top-border {
-  border-top: 1px solid silver;
+.border-top {
+  border-top: 1px solid silver !important;
+  margin-top: -2px;
 }
 
 .table thead {
@@ -40,4 +42,12 @@ body {
   border: 1px solid #b7bddd !important;
   position: relative;
   padding: 10px;
+}
+
+.table thead th {
+  color: antiquewhite;
+}
+
+.card-title {
+  color: antiquewhite;
 }
