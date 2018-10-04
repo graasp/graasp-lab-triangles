@@ -17,6 +17,7 @@ class FormViews extends Component {
       { x: 200, y: 100 },
       { x: 100, y: 150 },
     ],
+    rotated: false,
   }
 
   handlePointChange = (event) => {
@@ -24,11 +25,13 @@ class FormViews extends Component {
     if (event.target.value === '') {
       event.target.value = 0;
     }
+    if (event.target.value > 300) {
+      event.target.value = 300;
+    }
     const { handlePChange } = this.props;
     const { points } = this.state;
     const { dataset: { index, axis }, value } = event.target;
     const newPoints = [...points];
-    console.log('newPoints', newPoints);
     newPoints[index][axis] = Number.parseInt(value, 10);
     handlePChange(newPoints);
   }
@@ -38,10 +41,11 @@ class FormViews extends Component {
     const { points } = this.state;
     const newPoints = [...points];
     for (let i = 0; i < newPoints.length; i++) {
-      newPoints[i].x += 20;
-      console.log('newPoints[i].x', newPoints[i].x);
+      if (newPoints[i].x < 300) {
+        newPoints[i].x += 20;
+        handlePChange(newPoints);
+      }
     }
-    handlePChange(newPoints);
   }
 
   handleShiftLeft = () => {
@@ -49,32 +53,33 @@ class FormViews extends Component {
     const { points } = this.state;
     const newPoints = [...points];
     for (let i = 0; i < newPoints.length; i++) {
-      newPoints[i].x -= 20;
-      console.log('newPoints[i].x', newPoints[i].x);
+      if (newPoints[i].x > 0) {
+        newPoints[i].x -= 20;
+        handlePChange(newPoints);
+      }
     }
     handlePChange(newPoints);
   }
 
-  handleRotate = () => {
+  handleRotate = (event) => {
+    console.log('event', event.target);
     const elm = document.querySelectorAll('.konvajs-content');
-    let rotated = false;
-    const deg = rotated ? 0 : 60;
+    const { rotated } = this.state;
+    const deg = rotated ? 0 : 180;
     for (let i = 0; i < elm.length; i++) {
-      console.log('deg', deg);
+      elm[i].setAttribute('id', [i])
       elm[i].style.webkitTransform = 'rotate('+deg+'deg)';
       elm[i].style.mozTransform    = 'rotate('+deg+'deg)';
       elm[i].style.msTransform     = 'rotate('+deg+'deg)';
       elm[i].style.oTransform      = 'rotate('+deg+'deg)';
       elm[i].style.transform       = 'rotate('+deg+'deg)';
     }
-    rotated = !rotated;
-
-    console.log('Rotation clicked', elm);
+    this.setState({ rotated: !rotated });
   }
 
   render() {
     const { node } = this.props;
-    const { points } = this.state;
+    const { rotated, points } = this.state;
     return (
       <div className="mt-3">
         <Table borderless>
@@ -149,9 +154,9 @@ class FormViews extends Component {
             </tr>
           </tbody>
         </Table>
-        <Button color="success" size="sm" onClick={this.handleShiftLeft}>Shift-Left</Button>
+        <Button color="success" size="sm" onClick={rotated ? this.handleShiftRight : this.handleShiftLeft}>Shift-Left</Button>
         <Button color="outline-warning" size="sm" className="ml-3 mr-3" onClick={this.handleRotate}>Rotate</Button>
-        <Button color="success" size="sm" onClick={this.handleShiftRight}>Shift-Right</Button>
+        <Button color="success" size="sm" onClick={rotated ? this.handleShiftLeft : this.handleShiftRight}>Shift-Right</Button>
       </div>
     );
   }
