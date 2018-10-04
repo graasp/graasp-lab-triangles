@@ -43,8 +43,8 @@ class Dimensions extends Component {
     const { point, value } = this.state;
     const { node, color } = this.props;
     return (
-      <Row className="px-5">
-        <Col md="6" className="right-border">
+      <Row>
+        <Col md="6" className="right-border pt-4">
           <CardTitle>
             <span>
               Triangle&nbsp;
@@ -60,7 +60,7 @@ class Dimensions extends Component {
           />
         </Col>
 
-        <Stage width="300" height="300">
+        <Stage width="300" height="300" className="border-top">
           <Tri
             points={
               [
