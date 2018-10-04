@@ -122,11 +122,11 @@ class SimulationButtons extends Component {
     const { success, flashed } = this.state;
     const { value1, value2, value3 } = success;
     return (
-      <Row className="pt-5">
-        {flashed ? this.handleMessage(value1, value2, value3) : ''}
-        <div className="ml-auto">
-          <Button color="info" onClick={this.handleSimulate}>Compare</Button>
+      <Row className="pt-3 border-top">
+        <div className="ml-3">
+          <Button color="info p-3 mr-5" onClick={this.handleSimulate}>Compare</Button>
         </div>
+        {flashed ? this.handleMessage(value1, value2, value3) : ''}
       </Row>
     );
   }
