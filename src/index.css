@@ -45,9 +45,21 @@ body {
 }
 
 .table thead th {
+  background: #666;
   color: antiquewhite;
 }
 
 .card-title {
   color: antiquewhite;
+}
+
+.btn-success {
+  color: #fff;
+  background-color: #266782;
+  border-color: #2f717b;
+}
+
+.alert {
+  margin-bottom: 0;
+  line-height: 2;
 }
