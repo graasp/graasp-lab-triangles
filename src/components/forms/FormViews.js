@@ -8,7 +8,11 @@ import {
 class FormViews extends Component {
   static propTypes = {
     handlePChange: PropTypes.func.isRequired,
-    node: PropTypes.object.isRequired,
+    node: PropTypes.shape({
+      A: PropTypes.string.isRequired,
+      B: PropTypes.string.isRequired,
+      C: PropTypes.string.isRequired,
+    }).isRequired,
   }
 
   state = {
@@ -55,8 +59,23 @@ class FormViews extends Component {
     }
   }
 
-  handleRotate = () => {
-    console.log('Rotation button handled');
+  handleRotate = (event) => {
+    const { handlePChange } = this.props;
+    const { points } = this.state;
+    const newPoints = [...points];
+    const Ox = (newPoints[0].x + newPoints[1].x + newPoints[2].x) / 3;
+    const Oy = (newPoints[0].y + newPoints[1].y + newPoints[2].y) / 3;
+    const radians = event.target.dataset.rotate === 'right' ? (Math.PI / 180) * 90 : (Math.PI / 180) * (-90);
+    const cos = Math.cos(radians);
+    const sin = Math.sin(radians);
+
+    newPoints.forEach((point) => {
+      const nx = (cos * (point.x - Ox)) + (sin * (point.y - Oy)) + Ox;
+      const ny = (cos * (point.y - Oy)) - (sin * (point.x - Ox)) + Oy;
+      point.x = Math.round(nx);
+      point.y = Math.round(ny);
+    });
+    handlePChange(newPoints);
   }
 
   render() {
@@ -137,7 +156,8 @@ class FormViews extends Component {
           </tbody>
         </Table>
         <Button color="success" size="sm" onClick={rotated ? this.handleShiftRight : this.handleShiftLeft}>Shift-Left</Button>
-        <Button color="outline-warning" size="sm" className="ml-3 mr-3" onClick={this.handleRotate}>Rotate</Button>
+        <Button color="outline-warning" size="sm" className="ml-3 mr-3" onClick={this.handleRotate} data-rotate="left">Rotate Left</Button>
+        <Button color="outline-warning" size="sm" className="ml-3 mr-3" onClick={this.handleRotate} data-rotate="right">Rotate Right</Button>
         <Button color="success" size="sm" onClick={rotated ? this.handleShiftLeft : this.handleShiftRight}>Shift-Right</Button>
       </div>
     );
