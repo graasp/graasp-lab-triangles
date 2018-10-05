@@ -57,6 +57,7 @@ class Dimensions extends Component {
             value={value}
             handlePChange={this.handlePChange}
             node={node}
+            point={point}
           />
         </Col>
 
