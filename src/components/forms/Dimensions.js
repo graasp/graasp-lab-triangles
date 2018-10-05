@@ -10,7 +10,11 @@ import FormViews from './FormViews';
 class Dimensions extends Component {
   static propTypes = {
     updateDimensions: PropTypes.func.isRequired,
-    node: PropTypes.object.isRequired,
+    node: PropTypes.shape({
+      A: PropTypes.string.isRequired,
+      B: PropTypes.string.isRequired,
+      C: PropTypes.string.isRequired,
+    }).isRequired,
     color: PropTypes.string.isRequired,
   }
 
