@@ -4,15 +4,18 @@ import PropTypes from 'prop-types';
 import Big from 'big.js';
 
 class SimulationButtons extends Component {
-  static propTypes: {
+  static propTypes = {
     flashed: PropTypes.bool.isRequired,
-    triangles: PropTypes.object.isRequired,
+    triangles: PropTypes.shape({
+      triOne: PropTypes.array.isRequired,
+      triTwo: PropTypes.array.isRequired,
+    }).isRequired,
   }
 
   constructor(props) {
     super(props);
     this.state = {
-      flashed: this.props.flashed,
+      flashed: props.flashed,
       visible: true,
       success: {
         value1: '',
@@ -81,7 +84,6 @@ class SimulationButtons extends Component {
     const value1 = dAB.div(dABprim);
     const value2 = dAC.div(dACprim);
     const value3 = dBC.div(dBCprim);
-    console.log('3 sides values', value1.toString(), value2.toString(), value3.toString());
     this.setState({
       success: {
         value1: value1.toString(),
