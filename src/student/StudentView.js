@@ -56,7 +56,13 @@ class StudentView extends Component {
     return (
       <div className="App">
         <Container className="App-body">
-          <h1 className="text-center mt-5 text-primary">Online <strong>Triangles</strong> Comparator</h1>
+          <h1 className="text-center mt-5 text-primary">
+            Online&nbsp;
+            <strong>
+              Triangles&nbsp;
+            </strong>
+            Comparator&nbsp;
+          </h1>
           <Card body className="bg-secondary mt-5 pt-0">
             <Dimensions name="triOne" updateDimensions={this.updateDimensionsOne} node={nodeOne} color={colorOne} />
             <Dimensions name="triTwo" updateDimensions={this.updateDimensionsTwo} node={nodeTwo} color={colorTwo} />
