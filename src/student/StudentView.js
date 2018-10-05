@@ -9,7 +9,7 @@ class StudentView extends Component {
     this.state = {
       flashed: false,
       colorOne: 'blue',
-      colorTwo: '#ffc107',
+      colorTwo: '#FD9735',
       triOne: [
         { x: 50, y: 50 },
         { x: 200, y: 100 },
@@ -56,15 +56,15 @@ class StudentView extends Component {
     return (
       <div className="App">
         <Container className="App-body">
-          <h1 className="text-center mt-5 text-primary">Online <strong>Triangles</strong> Comparer</h1>
-          <Card body className="bg-info mt-5 pt-0">
+          <h1 className="text-center mt-5 text-primary">Online <strong>Triangles</strong> Comparator</h1>
+          <Card body className="bg-secondary mt-5 pt-0">
             <Dimensions name="triOne" updateDimensions={this.updateDimensionsOne} node={nodeOne} color={colorOne} />
             <Dimensions name="triTwo" updateDimensions={this.updateDimensionsTwo} node={nodeTwo} color={colorTwo} />
+            <SimulationButtons
+              triangles={{ triOne: triOne, triTwo: triTwo }}
+              flashed={flashed}
+            />
           </Card>
-          <SimulationButtons
-            triangles={{ triOne: triOne, triTwo: triTwo }}
-            flashed={flashed}
-          />
         </Container>
       </div>
     );
