@@ -23,10 +23,10 @@ class FormViews extends Component {
   handlePointChange = (event) => {
     event.preventDefault();
     if (event.target.value === '') {
-      event.target.value = 0;
+      event.target.value = 0; // eslint-disable-line no-param-reassign
     }
     if (event.target.value > 300) {
-      event.target.value = 300;
+      event.target.value = 300; // eslint-disable-line no-param-reassign
     }
     const { handlePChange } = this.props;
     const { points } = this.state;
@@ -43,7 +43,7 @@ class FormViews extends Component {
 
     const reachedLimit = newPoints.some(point => point.x === 300);
     if (!reachedLimit) {
-      newPoints.forEach((point) => { point.x += 20; });
+      newPoints.forEach((point) => { point.x += 20; }); // eslint-disable-line no-param-reassign
       handlePChange(newPoints);
     }
   }
@@ -54,7 +54,7 @@ class FormViews extends Component {
     const newPoints = [...points];
     const reachedLimit = newPoints.some(point => point.x < 20);
     if (!reachedLimit) {
-      newPoints.forEach((point) => { point.x -= 20; });
+      newPoints.forEach((point) => { point.x -= 20; }); // eslint-disable-line no-param-reassign
       handlePChange(newPoints);
     }
   }
@@ -72,8 +72,8 @@ class FormViews extends Component {
     newPoints.forEach((point) => {
       const nx = (cos * (point.x - Ox)) + (sin * (point.y - Oy)) + Ox;
       const ny = (cos * (point.y - Oy)) - (sin * (point.x - Ox)) + Oy;
-      point.x = Math.round(nx);
-      point.y = Math.round(ny);
+      point.x = Math.round(nx); // eslint-disable-line no-param-reassign
+      point.y = Math.round(ny); // eslint-disable-line no-param-reassign
     });
     handlePChange(newPoints);
   }
