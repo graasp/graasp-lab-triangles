@@ -67,7 +67,7 @@ class StudentView extends Component {
             <Dimensions name="triOne" updateDimensions={this.updateDimensionsOne} node={nodeOne} color={colorOne} />
             <Dimensions name="triTwo" updateDimensions={this.updateDimensionsTwo} node={nodeTwo} color={colorTwo} />
             <SimulationButtons
-              triangles={{ triOne: triOne, triTwo: triTwo }}
+              triangles={{ triOne, triTwo }}
               flashed={flashed}
             />
           </Card>
