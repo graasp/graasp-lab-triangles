@@ -8,6 +8,10 @@ import {
 class FormViews extends Component {
   static propTypes = {
     handlePChange: PropTypes.func.isRequired,
+    points: PropTypes.arrayOf(PropTypes.shape({
+      x: PropTypes.number.isRequired,
+      y: PropTypes.number.isRequired,
+    })).isRequired,
     node: PropTypes.shape({
       A: PropTypes.string.isRequired,
       B: PropTypes.string.isRequired,
@@ -15,9 +19,13 @@ class FormViews extends Component {
     }).isRequired,
   }
 
-  state = {
-    rotated: false,
-    points: this.props.point,
+  constructor(props) {
+    super(props);
+    const { points } = props;
+    this.state = {
+      rotated: false,
+      points,
+    };
   }
 
   handlePointChange = (event) => {
@@ -43,7 +51,10 @@ class FormViews extends Component {
 
     const reachedLimit = newPoints.some(point => point.x === 300);
     if (!reachedLimit) {
-      newPoints.forEach((point) => { point.x += 20; }); // eslint-disable-line no-param-reassign
+      newPoints.forEach((point) => {
+        // eslint-disable-next-line no-param-reassign
+        point.x += 20;
+      });
       handlePChange(newPoints);
     }
   }
@@ -54,7 +65,8 @@ class FormViews extends Component {
     const newPoints = [...points];
     const reachedLimit = newPoints.some(point => point.x < 20);
     if (!reachedLimit) {
-      newPoints.forEach((point) => { point.x -= 20; }); // eslint-disable-line no-param-reassign
+      // eslint-disable-next-line no-param-reassign
+      newPoints.forEach((point) => { point.x -= 20; });
       handlePChange(newPoints);
     }
   }
@@ -72,8 +84,10 @@ class FormViews extends Component {
     newPoints.forEach((point) => {
       const nx = (cos * (point.x - Ox)) + (sin * (point.y - Oy)) + Ox;
       const ny = (cos * (point.y - Oy)) - (sin * (point.x - Ox)) + Oy;
-      point.x = Math.round(nx); // eslint-disable-line no-param-reassign
-      point.y = Math.round(ny); // eslint-disable-line no-param-reassign
+      // eslint-disable-next-line no-param-reassign
+      point.x = Math.round(nx);
+      // eslint-disable-next-line no-param-reassign
+      point.y = Math.round(ny);
     });
     handlePChange(newPoints);
   }

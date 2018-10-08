@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Layer, Shape } from 'react-konva';
 
 const Tri = ({ color, points }) => (
@@ -18,5 +19,13 @@ const Tri = ({ color, points }) => (
     />
   </Layer>
 );
+
+Tri.propTypes = {
+  color: PropTypes.string.isRequired,
+  points: PropTypes.arrayOf(PropTypes.shape({
+    x: PropTypes.number.isRequired,
+    y: PropTypes.number.isRequired,
+  })).isRequired,
+};
 
 export default Tri;

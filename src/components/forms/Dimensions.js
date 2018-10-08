@@ -22,7 +22,7 @@ class Dimensions extends Component {
     super(props);
     this.state = {
       value: true,
-      point: [
+      points: [
         { x: 50, y: 50 },
         { x: 200, y: 100 },
         { x: 100, y: 150 },
@@ -34,7 +34,7 @@ class Dimensions extends Component {
 
   handlePChange(coordinates) {
     const { updateDimensions } = this.props;
-    this.setState({ point: coordinates });
+    this.setState({ points: coordinates });
     updateDimensions(coordinates);
   }
 
@@ -44,7 +44,7 @@ class Dimensions extends Component {
   }
 
   render() {
-    const { point, value } = this.state;
+    const { points, value } = this.state;
     const { node, color } = this.props;
     return (
       <Row>
@@ -61,7 +61,7 @@ class Dimensions extends Component {
             value={value}
             handlePChange={this.handlePChange}
             node={node}
-            point={point}
+            points={points}
           />
         </Col>
 
@@ -69,9 +69,9 @@ class Dimensions extends Component {
           <Tri
             points={
               [
-                { x: point[0].x, y: point[0].y },
-                { x: point[1].x, y: point[1].y },
-                { x: point[2].x, y: point[2].y },
+                { x: points[0].x, y: points[0].y },
+                { x: points[1].x, y: points[1].y },
+                { x: points[2].x, y: points[2].y },
               ]
             }
             color={color}
