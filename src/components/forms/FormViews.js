@@ -8,6 +8,7 @@ import {
 class FormViews extends Component {
   static propTypes = {
     handlePChange: PropTypes.func.isRequired,
+    rotated: PropTypes.bool.isRequired,
     points: PropTypes.arrayOf(PropTypes.shape({
       x: PropTypes.number.isRequired,
       y: PropTypes.number.isRequired,
@@ -21,9 +22,9 @@ class FormViews extends Component {
 
   constructor(props) {
     super(props);
-    const { points } = props;
+    const { points, rotated } = props;
     this.state = {
-      rotated: false,
+      rotated,
       points,
     };
   }

@@ -21,7 +21,6 @@ class Dimensions extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: true,
       points: [
         { x: 50, y: 50 },
         { x: 200, y: 100 },
@@ -29,7 +28,6 @@ class Dimensions extends Component {
       ],
     };
     this.handlePChange = this.handlePChange.bind(this);
-    this.handleView = this.handleView.bind(this);
   }
 
   handlePChange(coordinates) {
@@ -38,13 +36,8 @@ class Dimensions extends Component {
     updateDimensions(coordinates);
   }
 
-  handleView() {
-    const { value } = this.state;
-    this.setState({ value: !value });
-  }
-
   render() {
-    const { points, value } = this.state;
+    const { points } = this.state;
     const { node, color } = this.props;
     return (
       <Row>
@@ -58,7 +51,6 @@ class Dimensions extends Component {
             </span>
           </CardTitle>
           <FormViews
-            value={value}
             handlePChange={this.handlePChange}
             node={node}
             points={points}
