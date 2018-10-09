@@ -7,9 +7,11 @@ class StudentView extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      classOne: 'class-One',
+      classTwo: 'class-Two',
       flashed: false,
-      colorOne: 'blue',
-      colorTwo: '#FD9735',
+      colorOne: 'rgb(29,103, 189)',
+      colorTwo: 'rgb(29,103, 189)',
       triOne: [
         { x: 50, y: 50 },
         { x: 200, y: 100 },
@@ -50,7 +52,7 @@ class StudentView extends Component {
 
   render() {
     const {
-      flashed, triOne, triTwo, nodeOne,
+      classOne, classTwo, flashed, triOne, triTwo, nodeOne,
       nodeTwo, colorOne, colorTwo,
     } = this.state;
     return (
@@ -63,9 +65,9 @@ class StudentView extends Component {
             </strong>
             Comparator&nbsp;
           </h1>
-          <Card body className="bg-secondary mt-5 pt-0">
-            <Dimensions name="triOne" updateDimensions={this.updateDimensionsOne} node={nodeOne} color={colorOne} />
-            <Dimensions name="triTwo" updateDimensions={this.updateDimensionsTwo} node={nodeTwo} color={colorTwo} />
+          <Card body className="mt-5 pt-0">
+            <Dimensions triangles={triOne} name="triOne" updateDimensions={this.updateDimensionsOne} node={nodeOne} color={colorOne} clax={classOne} />
+            <Dimensions triangles={triTwo} name="triTwo" updateDimensions={this.updateDimensionsTwo} node={nodeTwo} color={colorTwo} clax={classTwo} />
             <SimulationButtons
               triangles={{ triOne, triTwo }}
               flashed={flashed}
