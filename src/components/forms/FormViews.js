@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Button, InputGroup, InputGroupText,
+  InputGroup, InputGroupText,
   InputGroupAddon, Input, Table,
 } from 'reactstrap';
 
 class FormViews extends Component {
   static propTypes = {
     handlePChange: PropTypes.func.isRequired,
-    rotated: PropTypes.bool.isRequired,
     points: PropTypes.arrayOf(PropTypes.shape({
       x: PropTypes.number.isRequired,
       y: PropTypes.number.isRequired,
@@ -22,9 +21,8 @@ class FormViews extends Component {
 
   constructor(props) {
     super(props);
-    const { points, rotated } = props;
+    const { points } = props;
     this.state = {
-      rotated,
       points,
     };
   }
@@ -45,57 +43,9 @@ class FormViews extends Component {
     handlePChange(newPoints);
   }
 
-  handleShiftRight = () => {
-    const { handlePChange } = this.props;
-    const { points } = this.state;
-    const newPoints = [...points];
-
-    const reachedLimit = newPoints.some(point => point.x === 300);
-    if (!reachedLimit) {
-      newPoints.forEach((point) => {
-        // eslint-disable-next-line no-param-reassign
-        point.x += 20;
-      });
-      handlePChange(newPoints);
-    }
-  }
-
-  handleShiftLeft = () => {
-    const { handlePChange } = this.props;
-    const { points } = this.state;
-    const newPoints = [...points];
-    const reachedLimit = newPoints.some(point => point.x < 20);
-    if (!reachedLimit) {
-      // eslint-disable-next-line no-param-reassign
-      newPoints.forEach((point) => { point.x -= 20; });
-      handlePChange(newPoints);
-    }
-  }
-
-  handleRotate = (event) => {
-    const { handlePChange } = this.props;
-    const { points } = this.state;
-    const newPoints = [...points];
-    const Ox = (newPoints[0].x + newPoints[1].x + newPoints[2].x) / 3;
-    const Oy = (newPoints[0].y + newPoints[1].y + newPoints[2].y) / 3;
-    const radians = event.target.dataset.rotate === 'right' ? (Math.PI / 180) * 90 : (Math.PI / 180) * (-90);
-    const cos = Math.cos(radians);
-    const sin = Math.sin(radians);
-
-    newPoints.forEach((point) => {
-      const nx = (cos * (point.x - Ox)) + (sin * (point.y - Oy)) + Ox;
-      const ny = (cos * (point.y - Oy)) - (sin * (point.x - Ox)) + Oy;
-      // eslint-disable-next-line no-param-reassign
-      point.x = Math.round(nx);
-      // eslint-disable-next-line no-param-reassign
-      point.y = Math.round(ny);
-    });
-    handlePChange(newPoints);
-  }
-
   render() {
     const { node } = this.props;
-    const { rotated, points } = this.state;
+    const { points } = this.state;
     return (
       <div className="mt-3">
         <Table borderless>
@@ -170,10 +120,6 @@ class FormViews extends Component {
             </tr>
           </tbody>
         </Table>
-        <Button color="success" size="sm" onClick={rotated ? this.handleShiftRight : this.handleShiftLeft}>Shift-Left</Button>
-        <Button color="outline-warning" size="sm" className="ml-3 mr-3" onClick={this.handleRotate} data-rotate="left">Rotate Left</Button>
-        <Button color="outline-warning" size="sm" className="ml-3 mr-3" onClick={this.handleRotate} data-rotate="right">Rotate Right</Button>
-        <Button color="success" size="sm" onClick={rotated ? this.handleShiftLeft : this.handleShiftRight}>Shift-Right</Button>
       </div>
     );
   }
