@@ -49,10 +49,6 @@ body {
   color: antiquewhite;
 }
 
-.card-title {
-  color: antiquewhite;
-}
-
 .btn-success {
   color: #fff;
   background-color: #266782;
@@ -62,4 +58,16 @@ body {
 .alert {
   margin-bottom: 0;
   line-height: 2;
+}
+
+.class-One {
+  top: 37%;
+  position: absolute;
+  right: 7%;
+}
+
+.class-Two {
+  bottom: 15%;
+  position: absolute;
+  right: 7%;
 }
