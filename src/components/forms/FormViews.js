@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  InputGroup, InputGroupText,
-  InputGroupAddon, Input, Table,
-} from 'reactstrap';
+import { Table } from 'reactstrap';
+import TableDatas from './TableDatas';
 
 class FormViews extends Component {
   static propTypes = {
@@ -67,56 +65,14 @@ class FormViews extends Component {
           </thead>
           <tbody>
             <tr>
-              <td>
-                <InputGroup>
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>X</InputGroupText>
-                  </InputGroupAddon>
-                  <Input type="number" min="0" max="250" data-index="0" data-axis="x" value={points[0].x} onChange={this.handlePointChange} />
-                </InputGroup>
-              </td>
-              <td>
-                <InputGroup>
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>X</InputGroupText>
-                  </InputGroupAddon>
-                  <Input type="number" min="0" max="300" data-index="1" data-axis="x" value={points[1].x} onChange={this.handlePointChange} />
-                </InputGroup>
-              </td>
-              <td>
-                <InputGroup>
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>X</InputGroupText>
-                  </InputGroupAddon>
-                  <Input type="number" min="0" max="300" data-index="2" data-axis="x" value={points[2].x} onChange={this.handlePointChange} />
-                </InputGroup>
-              </td>
+              <TableDatas index="0" name="X" axis="x" points={points[0].x} handlePointChange={this.handlePointChange} />
+              <TableDatas index="1" name="X" axis="x" points={points[1].x} handlePointChange={this.handlePointChange} />
+              <TableDatas index="2" name="X" axis="x" points={points[2].x} handlePointChange={this.handlePointChange} />
             </tr>
             <tr>
-              <td>
-                <InputGroup>
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>Y</InputGroupText>
-                  </InputGroupAddon>
-                  <Input type="number" min="0" max="300" data-index="0" data-axis="y" value={points[0].y} onChange={this.handlePointChange} />
-                </InputGroup>
-              </td>
-              <td>
-                <InputGroup>
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>Y</InputGroupText>
-                  </InputGroupAddon>
-                  <Input type="number" min="0" max="300" data-index="1" data-axis="y" value={points[1].y} onChange={this.handlePointChange} />
-                </InputGroup>
-              </td>
-              <td>
-                <InputGroup>
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>Y</InputGroupText>
-                  </InputGroupAddon>
-                  <Input type="number" min="0" max="300" data-index="2" data-axis="y" value={points[2].y} onChange={this.handlePointChange} />
-                </InputGroup>
-              </td>
+              <TableDatas index="0" name="Y" axis="y" points={points[0].y} handlePointChange={this.handlePointChange} />
+              <TableDatas index="1" name="Y" axis="y" points={points[1].y} handlePointChange={this.handlePointChange} />
+              <TableDatas index="2" name="Y" axis="y" points={points[2].y} handlePointChange={this.handlePointChange} />
             </tr>
           </tbody>
         </Table>
