@@ -8,27 +8,14 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
+const translate = require('./translate.json');
+
 i18n
   .use(reactI18nextModule) // passes i18n down to react-i18next
   .init({
     resources: {
       en: {
-        translation: {
-          online: 'Online',
-          triangle: 'Triangles',
-          compare: 'Compare',
-          comparator: 'Comparator',
-          similar: 'Similar',
-          are: 'are',
-          arenot: 'are not',
-          and: 'and',
-          coordinates: 'coordinates',
-          shift: 'Shift',
-          rotate: 'Rotate',
-          point: 'Point',
-          welcome: 'Welcome to the Graasp App Starter Kit',
-          teacherView: 'This is the teacher view. Switch to the student view by clicking on the URL below.',
-        },
+        translation: translate,
       },
     },
     lng: 'en',
