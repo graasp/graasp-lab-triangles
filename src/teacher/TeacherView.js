@@ -1,5 +1,6 @@
 import React from 'react';
 import { Alert, Container } from 'reactstrap';
+import PropTypes from 'prop-types';
 import Logo from '../logo.svg';
 
 const TeacherView = () => (
@@ -18,5 +19,9 @@ const TeacherView = () => (
     </Container>
   </div>
 );
+
+TeacherView.propTypes = {
+  t: PropTypes.string.isRequired,
+};
 
 export default TeacherView;

@@ -5,6 +5,7 @@ import TableDatas from './TableDatas';
 
 class FormViews extends Component {
   static propTypes = {
+    t: PropTypes.string.isRequired,
     handlePChange: PropTypes.func.isRequired,
     points: PropTypes.arrayOf(PropTypes.shape({
       x: PropTypes.number.isRequired,

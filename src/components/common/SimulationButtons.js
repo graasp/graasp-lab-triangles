@@ -5,6 +5,7 @@ import Big from 'big.js';
 
 class SimulationButtons extends Component {
   static propTypes = {
+    t: PropTypes.string.isRequired,
     flashed: PropTypes.bool.isRequired,
     triangles: PropTypes.shape({
       triOne: PropTypes.array.isRequired,
