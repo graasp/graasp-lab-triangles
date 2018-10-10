@@ -14,10 +14,18 @@ i18n
     resources: {
       en: {
         translation: {
-          'Welcome to React': 'Welcome to React and react-i18next',
           online: 'Online',
           triangle: 'Triangles',
+          compare: 'Compare',
           comparator: 'Comparator',
+          similar: 'Similar',
+          are: 'are',
+          arenot: 'are not',
+          and: 'and',
+          coordinates: 'coordinates',
+          shift: 'Shift',
+          rotate: 'Rotate',
+          point: 'Point',
         },
       },
     },
@@ -30,7 +38,7 @@ i18n
 const AppWithI18n = withI18n()(App);
 
 App.propTypes = {
-  t: PropTypes.string.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 ReactDOM.render(<AppWithI18n />, document.getElementById('root'));

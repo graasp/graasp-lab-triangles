@@ -20,13 +20,10 @@ const TableDatas = ({
 );
 
 TableDatas.propTypes = {
-  points: PropTypes.arrayOf(PropTypes.shape({
-    x: PropTypes.number.isRequired,
-    y: PropTypes.number.isRequired,
-  })).isRequired,
+  points: PropTypes.number.isRequired,
   handlePointChange: PropTypes.func.isRequired,
-  axis: PropTypes.number.isRequired,
-  index: PropTypes.number.isRequired,
+  axis: PropTypes.string.isRequired,
+  index: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
 };
 

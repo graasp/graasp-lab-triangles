@@ -5,7 +5,7 @@ import Big from 'big.js';
 
 class SimulationButtons extends Component {
   static propTypes = {
-    t: PropTypes.string.isRequired,
+    t: PropTypes.func.isRequired,
     flashed: PropTypes.bool.isRequired,
     triangles: PropTypes.shape({
       triOne: PropTypes.array.isRequired,
@@ -16,6 +16,7 @@ class SimulationButtons extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      t: props.t,
       flashed: props.flashed,
       visible: true,
       success: {
@@ -96,38 +97,38 @@ class SimulationButtons extends Component {
   }
 
   handleMessage = (value1, value2, value3) => {
-    const { visible } = this.state;
+    const { visible, t } = this.state;
     if (value1 === value2 && value2 === value3) {
       return (
         <Alert color="success" isOpen={visible} toggle={this.onDismiss}>
-          Triangles&nbsp;
+          {t('triangles')}&nbsp;
           <strong>ABC</strong>
-          &nbsp;and&nbsp;
+          &nbsp;{t('and')}&nbsp;
           <strong>DEF</strong>
-          &nbsp;are&nbsp;
-          <strong>Similar</strong>
+          &nbsp;{t('are')}&nbsp;
+          <strong>{t('similar')}</strong>
         </Alert>
       );
     }
     return (
       <Alert color="danger" isOpen={visible} toggle={this.onDismiss}>
-        Triangles&nbsp;
+        {t('triangles')}&nbsp;
         <strong>ABC</strong>
-        &nbsp;and&nbsp;
+        &nbsp;{t('and')}&nbsp;
         <strong>DEF</strong>
-        &nbsp;are not &nbsp;
-        <strong>Similar</strong>
+        &nbsp;{t('arenot')} &nbsp;
+        <strong>{t('similar')}</strong>
       </Alert>
     );
   }
 
   render() {
-    const { success, flashed } = this.state;
+    const { success, flashed, t } = this.state;
     const { value1, value2, value3 } = success;
     return (
       <Row className="pt-3 border-top">
         <div className="ml-3">
-          <Button color="info p-3 mr-5" onClick={this.handleSimulate}>Compare</Button>
+          <Button color="info p-3 mr-5" onClick={this.handleSimulate}>{t('compare')}</Button>
         </div>
         {flashed ? this.handleMessage(value1, value2, value3) : ''}
       </Row>

@@ -7,7 +7,7 @@ import './App.css';
 
 class App extends Component {
   static propTypes = {
-    t: PropTypes.string.isRequired,
+    t: PropTypes.func.isRequired,
   }
 
   constructor(props) {

@@ -5,7 +5,7 @@ import TableDatas from './TableDatas';
 
 class FormViews extends Component {
   static propTypes = {
-    t: PropTypes.string.isRequired,
+    t: PropTypes.func.isRequired,
     handlePChange: PropTypes.func.isRequired,
     points: PropTypes.arrayOf(PropTypes.shape({
       x: PropTypes.number.isRequired,
@@ -43,7 +43,7 @@ class FormViews extends Component {
   }
 
   render() {
-    const { node } = this.props;
+    const { node, t } = this.props;
     const { points } = this.state;
     return (
       <div className="mt-3">
@@ -51,15 +51,15 @@ class FormViews extends Component {
           <thead>
             <tr>
               <th>
-                Point&nbsp;
+                {t('point')}&nbsp;
                 {node.A}
               </th>
               <th>
-                Point&nbsp;
+                {t('point')}&nbsp;
                 {node.B}
               </th>
               <th>
-                Point&nbsp;
+                {t('point')}&nbsp;
                 {node.C}
               </th>
             </tr>

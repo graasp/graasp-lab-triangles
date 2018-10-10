@@ -9,7 +9,7 @@ import FormViews from './FormViews';
 
 class Dimensions extends Component {
   static propTypes = {
-    t: PropTypes.string.isRequired,
+    t: PropTypes.func.isRequired,
     updateDimensions: PropTypes.func.isRequired,
     node: PropTypes.shape({
       A: PropTypes.string.isRequired,
@@ -18,7 +18,10 @@ class Dimensions extends Component {
     }).isRequired,
     clax: PropTypes.string.isRequired,
     color: PropTypes.string.isRequired,
-    triangles: PropTypes.string.isRequired,
+    triangles: PropTypes.arrayOf(PropTypes.shape({
+      x: PropTypes.number.isRequired,
+      y: PropTypes.number.isRequired,
+    })).isRequired,
   }
 
   constructor(props) {
@@ -82,22 +85,25 @@ class Dimensions extends Component {
 
   render() {
     const { points } = this.state;
-    const { node, color, clax } = this.props;
+    const {
+      node, color, clax, t,
+    } = this.props;
     return (
       <Row>
         <Col md="6" className="right-border pt-4">
           <CardTitle>
             <span>
-              Triangle&nbsp;
+              {t('triangle')}&nbsp;
               <strong>{`${node.A}${node.B}${node.C}`}</strong>
               &nbsp;
-              coordinates
+              {t('coordinates')}
             </span>
           </CardTitle>
           <FormViews
             handlePChange={this.handlePChange}
             node={node}
             points={points}
+            t={t}
           />
         </Col>
 
@@ -115,10 +121,22 @@ class Dimensions extends Component {
           />
         </Stage>
         <div className={clax}>
-          <Button color="success" size="sm" onClick={this.handleShiftLeft}>Shift L</Button>
-          <Button color="outline-warning" size="sm" className="ml-3 mr-3" onClick={this.handleRotate} data-rotate="left">Rotate L</Button>
-          <Button color="outline-warning" size="sm" className="ml-3 mr-3" onClick={this.handleRotate} data-rotate="right">Rotate R</Button>
-          <Button color="success" size="sm" onClick={this.handleShiftRight}>Shift R</Button>
+          <Button color="success" size="sm" onClick={this.handleShiftLeft}>
+            {t('shift')}
+            L
+          </Button>
+          <Button color="outline-warning" size="sm" className="ml-3 mr-3" onClick={this.handleRotate} data-rotate="left">
+            {t('rotate')}
+            L
+          </Button>
+          <Button color="outline-warning" size="sm" className="ml-3 mr-3" onClick={this.handleRotate} data-rotate="right">
+            {t('rotate')}
+            R
+          </Button>
+          <Button color="success" size="sm" onClick={this.handleShiftRight}>
+            {t('shift')}
+            R
+          </Button>
         </div>
       </Row>
     );

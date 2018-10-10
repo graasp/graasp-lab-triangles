@@ -21,7 +21,7 @@ const TeacherView = () => (
 );
 
 TeacherView.propTypes = {
-  t: PropTypes.string.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 export default TeacherView;

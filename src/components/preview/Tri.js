@@ -44,7 +44,11 @@ const Tri = ({ color, node, points }) => (
 
 Tri.propTypes = {
   color: PropTypes.string.isRequired,
-  node: PropTypes.string.isRequired,
+  node: PropTypes.shape({
+    A: PropTypes.string.isRequired,
+    B: PropTypes.string.isRequired,
+    C: PropTypes.string.isRequired,
+  }).isRequired,
   points: PropTypes.arrayOf(PropTypes.shape({
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired,

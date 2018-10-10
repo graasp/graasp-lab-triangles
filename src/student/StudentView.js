@@ -6,7 +6,7 @@ import Dimensions from '../components/forms/Dimensions';
 
 class StudentView extends Component {
   static propTypes = {
-    t: PropTypes.string.isRequired,
+    t: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -64,7 +64,6 @@ class StudentView extends Component {
     return (
       <div className="App">
         <Container className="App-body">
-          {t('Welcome to React')}
           <h1 className="text-center mt-5 text-primary">
             {t('online')}&nbsp;
             <strong>
@@ -73,9 +72,10 @@ class StudentView extends Component {
             {t('Comparator')}&nbsp;
           </h1>
           <Card body className="mt-5 pt-0">
-            <Dimensions triangles={triOne} name="triOne" updateDimensions={this.updateDimensionsOne} node={nodeOne} color={colorOne} clax={classOne} />
-            <Dimensions triangles={triTwo} name="triTwo" updateDimensions={this.updateDimensionsTwo} node={nodeTwo} color={colorTwo} clax={classTwo} />
+            <Dimensions t={t} triangles={triOne} name="triOne" updateDimensions={this.updateDimensionsOne} node={nodeOne} color={colorOne} clax={classOne} />
+            <Dimensions t={t} triangles={triTwo} name="triTwo" updateDimensions={this.updateDimensionsTwo} node={nodeTwo} color={colorTwo} clax={classTwo} />
             <SimulationButtons
+              t={t}
               triangles={{ triOne, triTwo }}
               flashed={flashed}
             />
