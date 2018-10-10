@@ -26,6 +26,8 @@ i18n
           shift: 'Shift',
           rotate: 'Rotate',
           point: 'Point',
+          welcome: 'Welcome to the Graasp App Starter Kit',
+          teacherView: 'This is the teacher view. Switch to the student view by clicking on the URL below.',
         },
       },
     },
