@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import { Card, Container } from 'reactstrap';
+import PropTypes from 'prop-types';
 import SimulationButtons from '../components/common/SimulationButtons';
 import Dimensions from '../components/forms/Dimensions';
 
 class StudentView extends Component {
+  static propTypes = {
+    t: PropTypes.string.isRequired,
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -55,15 +60,17 @@ class StudentView extends Component {
       classOne, classTwo, flashed, triOne, triTwo, nodeOne,
       nodeTwo, colorOne, colorTwo,
     } = this.state;
+    const { t } = this.props;
     return (
       <div className="App">
         <Container className="App-body">
+          {t('Welcome to React')}
           <h1 className="text-center mt-5 text-primary">
-            Online&nbsp;
+            {t('online')}&nbsp;
             <strong>
-              Triangles&nbsp;
+              {t('Triangles')}&nbsp;
             </strong>
-            Comparator&nbsp;
+            {t('Comparator')}&nbsp;
           </h1>
           <Card body className="mt-5 pt-0">
             <Dimensions triangles={triOne} name="triOne" updateDimensions={this.updateDimensionsOne} node={nodeOne} color={colorOne} clax={classOne} />
