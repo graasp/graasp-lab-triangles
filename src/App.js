@@ -13,12 +13,12 @@ class App extends Component {
   constructor(props) {
     super(props);
     const { mode = 'default' } = Qs.parse(window.location.search, { ignoreQueryPrefix: true });
-    const { t } = this.props;
-    this.state = { mode, t };
+    this.state = { mode };
   }
 
   render() {
-    const { mode, t } = this.state;
+    const { mode } = this.state;
+    const { t } = this.props;
 
     switch (mode) {
       // show teacher view when in teacher mode

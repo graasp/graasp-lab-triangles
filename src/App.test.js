@@ -6,9 +6,7 @@ it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(<App />, div);
 
-  expect(div.innerHTML).toContain('Triangle');
-  expect(div.innerHTML).toContain('Use Sides');
-  expect(div.innerHTML).toContain('Use Angle');
+  expect(div.innerHTML).toContain('Online Triangles Comparator');
 
   ReactDOM.unmountComponentAtNode(div);
 });

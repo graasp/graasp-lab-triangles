@@ -18,8 +18,10 @@
     "react-dom": "16.5.2",
     "react-i18next": "8.0.7",
     "react-konva": "1.7.15",
+    "react-redux": "5.0.7",
     "react-scripts": "1.1.5",
-    "reactstrap": "6.4.0"
+    "reactstrap": "6.4.0",
+    "redux": "4.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
