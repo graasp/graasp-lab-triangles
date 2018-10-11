@@ -8,14 +8,14 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-const translate = require('./translate.json');
+const translateToEn = require('./translate.json');
 
 i18n
   .use(reactI18nextModule) // passes i18n down to react-i18next
   .init({
     resources: {
       en: {
-        translation: translate,
+        translation: translateToEn,
       },
     },
     lng: 'en',
