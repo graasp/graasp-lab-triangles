@@ -4,7 +4,7 @@ import StudentView from '../../student/StudentView';
 import Dimensions from '../forms/Dimensions';
 import SimulationButtons from '../common/SimulationButtons';
 
-describe('render student view and run it componets tests', () => {
+describe('render student view and run it components tests', () => {
   it('has one instance of student view', () => {
     const props = {
       t: jest.fn(),

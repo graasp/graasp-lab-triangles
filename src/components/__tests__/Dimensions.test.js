@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import Dimensions from '../forms/Dimensions';
 import FormViews from '../forms/FormViews';
 
-describe('render student view and run it componets tests', () => {
+describe('render dimension components tests', () => {
   it('has one instance of dimension', () => {
     const props = {
       t: jest.fn(),
@@ -43,5 +43,4 @@ describe('render student view and run it componets tests', () => {
     const wrapped = shallow(<FormViews {...props} />);
     expect(wrapped.find('div.App').length).toEqual(0);
   });
-
 });
