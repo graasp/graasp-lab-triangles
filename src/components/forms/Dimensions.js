@@ -107,7 +107,7 @@ class Dimensions extends Component {
           />
         </Col>
 
-        <Stage width="450" height="300" className="border-top">
+        <Stage width="450" height="300">
           <Tri
             points={
               [

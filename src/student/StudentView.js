@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Container } from 'reactstrap';
+import { Card } from 'reactstrap';
 import PropTypes from 'prop-types';
 import SimulationButtons from '../components/common/SimulationButtons';
 import Dimensions from '../components/forms/Dimensions';
@@ -64,14 +64,7 @@ class StudentView extends Component {
     console.log('t', t);
     return (
       <div className="App">
-        <Container className="App-body">
-          <h1 className="text-center mt-5 text-primary">
-            {t('online')}&nbsp;
-            <strong>
-              {t('Triangles')}&nbsp;
-            </strong>
-            {t('Comparator')}&nbsp;
-          </h1>
+        <div className="App-body mx-5">
           <Card body className="mt-5 pt-0">
             <Dimensions t={t} triangles={triOne} name="triOne" updateDimensions={this.updateDimensionsOne} node={nodeOne} color={colorOne} clax={classOne} />
             <Dimensions t={t} triangles={triTwo} name="triTwo" updateDimensions={this.updateDimensionsTwo} node={nodeTwo} color={colorTwo} clax={classTwo} />
@@ -81,7 +74,7 @@ class StudentView extends Component {
               flashed={flashed}
             />
           </Card>
-        </Container>
+        </div>
       </div>
     );
   }
