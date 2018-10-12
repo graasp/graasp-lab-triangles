@@ -61,7 +61,6 @@ class StudentView extends Component {
       nodeTwo, colorOne, colorTwo,
     } = this.state;
     const { t } = this.props;
-    console.log('t', t);
     return (
       <div className="App">
         <div className="App-body mx-5">
