@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Card } from 'reactstrap';
+import { Button, Card } from 'reactstrap';
 import PropTypes from 'prop-types';
 import SimulationButtons from '../components/common/SimulationButtons';
 import Dimensions from '../components/forms/Dimensions';
 
 class StudentView extends Component {
   static propTypes = {
+    i18n: PropTypes.shape({}).isRequired,
     t: PropTypes.func.isRequired,
   }
 
@@ -60,12 +61,18 @@ class StudentView extends Component {
       classOne, classTwo, flashed, triOne, triTwo, nodeOne,
       nodeTwo, colorOne, colorTwo,
     } = this.state;
-    const { t } = this.props;
+    const { i18n, t } = this.props;
+    const changeLanguage = (lng) => {
+      i18n.changeLanguage(lng);
+    };
+
     return (
       <div className="App">
         <div className="App-body mx-5">
+          <Button onClick={() => changeLanguage('fr')} className="btn btn-outline-primary">Fr</Button>
+          <Button onClick={() => changeLanguage('en')} className="btn btn-outline-primary ml-2">En</Button>
           <Card body className="mt-5 p-0 border-0">
-            <h5 className="text-right">Click on the bubble to Drag</h5>
+            <h5 className="text-right">{t('drag')}</h5>
             <Dimensions t={t} triangles={triOne} name="triOne" updateDimensions={this.updateDimensionsOne} node={nodeOne} color={colorOne} clax={classOne} />
             <Dimensions t={t} triangles={triTwo} name="triTwo" updateDimensions={this.updateDimensionsTwo} node={nodeTwo} color={colorTwo} clax={classTwo} />
             <SimulationButtons

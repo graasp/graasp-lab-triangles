@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Qs from 'qs';
 import PropTypes from 'prop-types';
+import { translate } from 'react-i18next';
 import TeacherView from './teacher/TeacherView';
 import StudentView from './student/StudentView';
 import './App.css';
@@ -9,6 +10,7 @@ import LogoEtri from './etri-logo.png';
 
 class App extends Component {
   static propTypes = {
+    i18n: PropTypes.shape({}).isRequired,
     t: PropTypes.func.isRequired,
   }
 
@@ -31,7 +33,7 @@ class App extends Component {
 
   render() {
     const { mode, loading } = this.state;
-    const { t } = this.props;
+    const { i18n, t } = this.props;
     if (loading) {
       return (
         <div className="App-loader">
@@ -47,9 +49,9 @@ class App extends Component {
       // by default go with the student mode
       case 'student':
       default:
-        return <StudentView t={t} />;
+        return <StudentView t={t} changeLanguage={this.changeLanguage} i18n={i18n} />;
     }
   }
 }
 
-export default App;
+export default translate('translations')(App);
