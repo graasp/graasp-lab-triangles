@@ -128,7 +128,7 @@ class Dimensions extends Component {
   render() {
     const { points } = this.state;
     const {
-      flashed, node, color, clax, t,
+      node, color, clax, t,
     } = this.props;
 
     return (
@@ -147,7 +147,6 @@ class Dimensions extends Component {
             node={node}
             points={points}
             t={t}
-            flashed={flashed}
           />
         </Col>
         <Col md="6" className="pt-4">
