@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import {
   Button, CardTitle, Col, Row,
 } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// eslint-disable-next-line
+import { faCoffee } from '@fortawesome/fontawesome-free-solid';
 import { Stage } from 'react-konva';
 import Tri from '../preview/Tri';
 import FormViews from './FormViews';
@@ -36,7 +39,7 @@ class Dimensions extends Component {
     const { points } = this.state;
     const newPoints = [...points];
 
-    const reachedLimit = newPoints.some(point => point.x > 450);
+    const reachedLimit = newPoints.some(point => point.x > 410);
     if (!reachedLimit) {
       newPoints.forEach((point) => {
         // eslint-disable-next-line no-param-reassign
@@ -77,6 +80,42 @@ class Dimensions extends Component {
     this.handlePChange(newPoints);
   }
 
+  handleDragMove = (e) => {
+    const { points } = this.state;
+    const newPoints = [...points];
+    if (e.target.x() >= 1 && e.target.x() <= 435) {
+      newPoints[0].x = e.target.x();
+    }
+    if (e.target.y() >= 30 && e.target.y() <= 295) {
+      newPoints[0].y = e.target.y();
+    }
+    this.handlePChange(newPoints);
+  };
+
+  handleDragMoveOne = (e) => {
+    const { points } = this.state;
+    const newPoints = [...points];
+    if (e.target.x() >= 1 && e.target.x() <= 435) {
+      newPoints[1].x = e.target.x();
+    }
+    if (e.target.y() >= 30 && e.target.y() <= 295) {
+      newPoints[1].y = e.target.y();
+    }
+    this.handlePChange(newPoints);
+  };
+
+  handleDragMoveTwo = (e) => {
+    const { points } = this.state;
+    const newPoints = [...points];
+    if (e.target.x() >= 1 && e.target.x() <= 435) {
+      newPoints[2].x = e.target.x();
+    }
+    if (e.target.y() >= 30 && e.target.y() <= 295) {
+      newPoints[2].y = e.target.y();
+    }
+    this.handlePChange(newPoints);
+  };
+
   handlePChange(coordinates) {
     const { updateDimensions } = this.props;
     this.setState({ points: coordinates });
@@ -88,8 +127,9 @@ class Dimensions extends Component {
     const {
       node, color, clax, t,
     } = this.props;
+
     return (
-      <Row>
+      <Row className="relative">
         <Col md="6" className="right-border pt-4">
           <CardTitle>
             <span>
@@ -106,38 +146,41 @@ class Dimensions extends Component {
             t={t}
           />
         </Col>
-
-        <Stage width="450" height="300">
-          <Tri
-            points={
-              [
-                { x: points[0].x, y: points[0].y },
-                { x: points[1].x, y: points[1].y },
-                { x: points[2].x, y: points[2].y },
-              ]
-            }
-            color={color}
-            node={node}
-          />
-        </Stage>
-        <div className={clax}>
-          <Button color="success" size="sm" onClick={this.handleShiftLeft}>
-            {t('shift')}
-            L
-          </Button>
-          <Button color="outline-warning" size="sm" className="ml-3 mr-3" onClick={this.handleRotate} data-rotate="left">
-            {t('rotate')}
-            L
-          </Button>
-          <Button color="outline-warning" size="sm" className="ml-3 mr-3" onClick={this.handleRotate} data-rotate="right">
-            {t('rotate')}
-            R
-          </Button>
-          <Button color="success" size="sm" onClick={this.handleShiftRight}>
-            {t('shift')}
-            R
-          </Button>
-        </div>
+        <Col md="6" className="pt-4">
+          <div className={clax}>
+            <Button size="sm" onClick={this.handleShiftLeft} className="primary-blued">
+              <FontAwesomeIcon icon="chevron-left" />
+            </Button>
+            <br />
+            <Button size="sm" className="mt-2 primary-blued realign" onClick={this.handleRotate} data-rotate="left">
+              <FontAwesomeIcon icon="redo" />
+            </Button>
+            <br />
+            <Button size="sm" className="my-2 primary-blued realign" onClick={this.handleRotate} data-rotate="right">
+              <FontAwesomeIcon icon="undo" />
+            </Button>
+            <br />
+            <Button size="sm" onClick={this.handleShiftRight} className="primary-blued">
+              <FontAwesomeIcon icon="chevron-right" />
+            </Button>
+          </div>
+          <Stage width="450" height="300">
+            <Tri
+              points={
+                [
+                  { x: points[0].x, y: points[0].y },
+                  { x: points[1].x, y: points[1].y },
+                  { x: points[2].x, y: points[2].y },
+                ]
+              }
+              color={color}
+              node={node}
+              handleDragMove={this.handleDragMove}
+              handleDragMoveOne={this.handleDragMoveOne}
+              handleDragMoveTwo={this.handleDragMoveTwo}
+            />
+          </Stage>
+        </Col>
       </Row>
     );
   }
