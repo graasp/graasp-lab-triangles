@@ -100,7 +100,7 @@ class SimulationButtons extends Component {
     const { visible, t } = this.state;
     if (value1 === value2 && value2 === value3) {
       return (
-        <Alert color="success" isOpen={visible} toggle={this.onDismiss}>
+        <Alert color="success" isOpen={visible}>
           {t('triangles')}&nbsp;
           <strong>ABC</strong>
           &nbsp;{t('and')}&nbsp;
@@ -111,7 +111,7 @@ class SimulationButtons extends Component {
       );
     }
     return (
-      <Alert color="danger" isOpen={visible} toggle={this.onDismiss}>
+      <Alert color="danger" isOpen={visible}>
         {t('triangles')}&nbsp;
         <strong>ABC</strong>
         &nbsp;{t('and')}&nbsp;
@@ -126,12 +126,16 @@ class SimulationButtons extends Component {
     const { success, flashed, t } = this.state;
     const { value1, value2, value3 } = success;
     return (
-      <Row className="pt-3 border-top">
-        <div className="ml-3">
-          <Button color="info p-3 mr-5" onClick={this.handleSimulate}>{t('compare')}</Button>
+      <div className="pt-3">
+        <Row>
+          <div className="mx-auto">
+            {flashed ? this.handleMessage(value1, value2, value3) : ''}
+          </div>
+        </Row>
+        <div className="ml-3 mt-3">
+          <Button color="info p-3 mr-5 compare-btn" onClick={this.handleSimulate}>{t('compare')}</Button>
         </div>
-        {flashed ? this.handleMessage(value1, value2, value3) : ''}
-      </Row>
+      </div>
     );
   }
 }
