@@ -64,7 +64,8 @@ class StudentView extends Component {
     return (
       <div className="App">
         <div className="App-body mx-5">
-          <Card body className="mt-5 pt-0">
+          <Card body className="mt-5 p-0 border-0">
+            <h5 className="text-right">Click on the bubble to Drag</h5>
             <Dimensions t={t} triangles={triOne} name="triOne" updateDimensions={this.updateDimensionsOne} node={nodeOne} color={colorOne} clax={classOne} />
             <Dimensions t={t} triangles={triTwo} name="triTwo" updateDimensions={this.updateDimensionsTwo} node={nodeTwo} color={colorTwo} clax={classTwo} />
             <SimulationButtons
