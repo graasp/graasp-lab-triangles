@@ -72,6 +72,9 @@ class Dimensions extends Component {
     newPoints.forEach((point) => {
       const nx = (cos * (point.x - Ox)) + (sin * (point.y - Oy)) + Ox;
       const ny = (cos * (point.y - Oy)) - (sin * (point.x - Ox)) + Oy;
+      if (Math.round(nx) < 1 || Math.round(ny) > 420) {
+        return;
+      }
       // eslint-disable-next-line no-param-reassign
       point.x = Math.round(nx);
       // eslint-disable-next-line no-param-reassign
@@ -125,7 +128,7 @@ class Dimensions extends Component {
   render() {
     const { points } = this.state;
     const {
-      node, color, clax, t,
+      flashed, node, color, clax, t,
     } = this.props;
 
     return (
@@ -144,6 +147,7 @@ class Dimensions extends Component {
             node={node}
             points={points}
             t={t}
+            flashed={flashed}
           />
         </Col>
         <Col md="6" className="pt-4">
