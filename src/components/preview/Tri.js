@@ -21,6 +21,11 @@ const Tri = ({
     <Line points={[0, 250, 1000, 250]} stroke="#ced4da" strokeWidth={0.5} />
     <Line points={[0, 275, 1000, 275]} stroke="#ced4da" strokeWidth={0.5} />
     <Line points={[0, 300, 1000, 300]} stroke="#ced4da" strokeWidth={0.5} />
+    <Line points={[0, 325, 1000, 325]} stroke="#ced4da" strokeWidth={0.5} />
+    <Line points={[0, 350, 1000, 350]} stroke="#ced4da" strokeWidth={0.5} />
+    <Line points={[0, 375, 1000, 375]} stroke="#ced4da" strokeWidth={0.5} />
+    <Line points={[0, 400, 1000, 400]} stroke="#ced4da" strokeWidth={0.5} />
+    <Line points={[0, 425, 1000, 425]} stroke="#ced4da" strokeWidth={0.5} />
 
     <Line points={[0, 0, 0, 1000]} stroke="#ced4da" strokeWidth={0.5} />
     <Line points={[25, 0, 25, 1000]} stroke="#ced4da" strokeWidth={0.5} />
@@ -40,7 +45,6 @@ const Tri = ({
     <Line points={[375, 0, 375, 1000]} stroke="#ced4da" strokeWidth={0.5} />
     <Line points={[400, 0, 400, 1000]} stroke="#ced4da" strokeWidth={0.5} />
     <Line points={[425, 0, 425, 1000]} stroke="#ced4da" strokeWidth={0.5} />
-    <Line points={[450, 0, 450, 1000]} stroke="#ced4da" strokeWidth={0.5} />
     <Shape
       sceneFunc={(context, shape) => {
         context.beginPath();

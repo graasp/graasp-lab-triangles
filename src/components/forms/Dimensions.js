@@ -89,7 +89,7 @@ class Dimensions extends Component {
     if (e.target.x() >= 1 && e.target.x() <= 435) {
       newPoints[0].x = e.target.x();
     }
-    if (e.target.y() >= 30 && e.target.y() <= 295) {
+    if (e.target.y() >= 30 && e.target.y() <= 435) {
       newPoints[0].y = e.target.y();
     }
     this.handlePChange(newPoints);
@@ -101,7 +101,7 @@ class Dimensions extends Component {
     if (e.target.x() >= 1 && e.target.x() <= 435) {
       newPoints[1].x = e.target.x();
     }
-    if (e.target.y() >= 30 && e.target.y() <= 295) {
+    if (e.target.y() >= 30 && e.target.y() <= 435) {
       newPoints[1].y = e.target.y();
     }
     this.handlePChange(newPoints);
@@ -113,7 +113,7 @@ class Dimensions extends Component {
     if (e.target.x() >= 1 && e.target.x() <= 435) {
       newPoints[2].x = e.target.x();
     }
-    if (e.target.y() >= 30 && e.target.y() <= 295) {
+    if (e.target.y() >= 30 && e.target.y() <= 435) {
       newPoints[2].y = e.target.y();
     }
     this.handlePChange(newPoints);
@@ -168,7 +168,7 @@ class Dimensions extends Component {
               <FontAwesomeIcon icon="chevron-right" />
             </Button>
           </div>
-          <Stage width="450" height="300">
+          <Stage width="450" height="450">
             <Tri
               points={
                 [
