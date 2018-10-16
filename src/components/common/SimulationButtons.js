@@ -133,7 +133,7 @@ class SimulationButtons extends Component {
           </div>
         </Row>
         <div className="ml-3 mt-3">
-          <Button color="info p-3 mr-5 compare-btn" onClick={this.handleSimulate}>{t('compare')}</Button>
+          <Button className="primary-blued p-3 mr-5 compare-btn" onClick={this.handleSimulate}>{t('compare')}</Button>
         </div>
       </div>
     );
