@@ -1,16 +1,17 @@
 import React from 'react';
 import { Alert, Container } from 'reactstrap';
+import PropTypes from 'prop-types';
 import Logo from '../logo.svg';
 
-const TeacherView = () => (
+const TeacherView = ({ t }) => (
   <div className="App">
     <header className="App-header">
       <img src={Logo} className="App-logo" alt="Logo" />
-      <h1 className="App-title">Welcome to the Graasp App Starter Kit</h1>
+      <h1 className="App-title">{t('welcome')}</h1>
     </header>
     <Container className="App-body">
       <Alert color="primary">
-        This is the teacher view. Switch to the student view by clicking on the URL below.
+        {t('teacherView')}
         <a href="?mode=student">
           <pre>{`${window.location.host}/?mode=student`}</pre>
         </a>
@@ -18,5 +19,9 @@ const TeacherView = () => (
     </Container>
   </div>
 );
+
+TeacherView.propTypes = {
+  t: PropTypes.func.isRequired,
+};
 
 export default TeacherView;
