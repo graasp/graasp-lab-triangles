@@ -1,4 +1,19 @@
+html, body, #root, .App-loader {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
 .App {
+  text-align: center;
+}
+
+.App-loader {
+  background: #5050d2;
+  padding-top: 20%;
   text-align: center;
 }
 
