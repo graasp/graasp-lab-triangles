@@ -12,11 +12,16 @@ class App extends Component {
   static propTypes = {
     i18n: PropTypes.shape({}).isRequired,
     t: PropTypes.func.isRequired,
-  }
+  };
 
   constructor(props) {
     super(props);
-    const { mode = 'default' } = Qs.parse(window.location.search, { ignoreQueryPrefix: true });
+    const {
+      mode = 'default',
+      lang = 'en',
+    } = Qs.parse(window.location.search, { ignoreQueryPrefix: true });
+    const { i18n } = this.props;
+    i18n.changeLanguage(lang);
     this.state = {
       mode,
       loading: true,
@@ -33,7 +38,7 @@ class App extends Component {
 
   render() {
     const { mode, loading } = this.state;
-    const { i18n, t } = this.props;
+    const { t } = this.props;
     if (loading) {
       return (
         <div className="App-loader">
@@ -44,12 +49,12 @@ class App extends Component {
     switch (mode) {
       // show teacher view when in teacher mode
       case 'teacher':
-        return <TeacherView />;
+        return <TeacherView t={t} />;
 
       // by default go with the student mode
       case 'student':
       default:
-        return <StudentView t={t} changeLanguage={this.changeLanguage} i18n={i18n} />;
+        return <StudentView t={t} />;
     }
   }
 }

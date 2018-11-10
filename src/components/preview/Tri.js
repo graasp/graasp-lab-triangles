@@ -5,8 +5,13 @@ import {
 } from 'react-konva';
 
 const Tri = ({
-  color, node, points,
-  handleDragMove, handleDragMoveOne, handleDragMoveTwo,
+  color,
+  node,
+  points,
+  handleDragMove,
+  handleDragMoveOne,
+  handleDragMoveTwo,
+  checkBoundaries,
 }) => (
   <Layer>
     <Line points={[0, 25, 1000, 25]} stroke="#ced4da" strokeWidth={0.5} />
@@ -69,6 +74,7 @@ const Tri = ({
       shadowBlur={5}
       onDragMove={handleDragMove}
       draggable
+      dragBoundFunc={pos => checkBoundaries(pos)}
     />
     <Circle
       x={points[1].x}
@@ -80,6 +86,7 @@ const Tri = ({
       shadowBlur={5}
       onDragMove={handleDragMoveOne}
       draggable
+      dragBoundFunc={pos => checkBoundaries(pos)}
     />
     <Circle
       x={points[2].x}
@@ -91,6 +98,7 @@ const Tri = ({
       shadowBlur={5}
       onDragMove={handleDragMoveTwo}
       draggable
+      dragBoundFunc={pos => checkBoundaries(pos)}
     />
     <Text
       x={points[0].x + 2}
@@ -119,6 +127,7 @@ const Tri = ({
 Tri.propTypes = {
   color: PropTypes.string.isRequired,
   handleDragMove: PropTypes.func.isRequired,
+  checkBoundaries: PropTypes.func.isRequired,
   handleDragMoveOne: PropTypes.func.isRequired,
   handleDragMoveTwo: PropTypes.func.isRequired,
   node: PropTypes.shape({

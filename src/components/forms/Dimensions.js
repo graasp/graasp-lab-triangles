@@ -1,186 +1,177 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Button, CardTitle, Col, Row,
+  Button,
+  CardTitle,
+  Col,
+  Row,
 } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// eslint-disable-next-line
+// todo: check solution to remove suppression
+// eslint-disable-next-line no-unused-vars
 import { faCoffee } from '@fortawesome/fontawesome-free-solid';
 import { Stage } from 'react-konva';
 import Tri from '../preview/Tri';
 import FormViews from './FormViews';
+import './Dimensions.css';
 
 class Dimensions extends Component {
   static propTypes = {
     t: PropTypes.func.isRequired,
     updateDimensions: PropTypes.func.isRequired,
+    clax: PropTypes.string.isRequired,
     node: PropTypes.shape({
       A: PropTypes.string.isRequired,
       B: PropTypes.string.isRequired,
       C: PropTypes.string.isRequired,
     }).isRequired,
-    clax: PropTypes.string.isRequired,
     color: PropTypes.string.isRequired,
     triangles: PropTypes.arrayOf(PropTypes.shape({
       x: PropTypes.number.isRequired,
       y: PropTypes.number.isRequired,
     })).isRequired,
-  }
+    message: PropTypes.bool,
+  };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      points: props.triangles,
-    };
-    this.handlePChange = this.handlePChange.bind(this);
-  }
+  static defaultProps = {
+    message: false,
+  };
 
-  handleShiftRight = () => {
-    const { points } = this.state;
-    const newPoints = [...points];
+  handleShift = (e, stepX, stepY) => {
+    const { triangles } = this.props;
+    const newPoints = [...triangles];
+    const coordinates = newPoints.map(({ x, y }) => ({
+      x: x + stepX,
+      y: y + stepY,
+    }));
+    this.handlePChange(coordinates);
+  };
 
-    const reachedLimit = newPoints.some(point => point.x > 410);
-    if (!reachedLimit) {
-      newPoints.forEach((point) => {
-        // eslint-disable-next-line no-param-reassign
-        point.x += 20;
-      });
-      this.handlePChange(newPoints);
-    }
-  }
-
-  handleShiftLeft = () => {
-    const { points } = this.state;
-    const newPoints = [...points];
-    const reachedLimit = newPoints.some(point => point.x < 20);
-    if (!reachedLimit) {
-      // eslint-disable-next-line no-param-reassign
-      newPoints.forEach((point) => { point.x -= 20; });
-      this.handlePChange(newPoints);
-    }
-  }
-
-  handleRotate = (event) => {
-    const { points } = this.state;
-    const newPoints = [...points];
+  handleRotate = (orientation) => {
+    const { triangles } = this.props;
+    const newPoints = [...triangles];
     const Ox = (newPoints[0].x + newPoints[1].x + newPoints[2].x) / 3;
     const Oy = (newPoints[0].y + newPoints[1].y + newPoints[2].y) / 3;
-    const radians = event.target.dataset.rotate === 'right' ? (Math.PI / 180) * 90 : (Math.PI / 180) * (-90);
+    const radians = orientation === 'ccw' ? (Math.PI / 180) * 90 : (Math.PI / 180) * (-90);
     const cos = Math.cos(radians);
     const sin = Math.sin(radians);
-
-    newPoints.forEach((point) => {
-      const nx = (cos * (point.x - Ox)) + (sin * (point.y - Oy)) + Ox;
-      const ny = (cos * (point.y - Oy)) - (sin * (point.x - Ox)) + Oy;
-      if (Math.round(nx) < 1 || Math.round(ny) > 420) {
-        return;
-      }
-      // eslint-disable-next-line no-param-reassign
-      point.x = Math.round(nx);
-      // eslint-disable-next-line no-param-reassign
-      point.y = Math.round(ny);
+    const coordinates = newPoints.map(({ x, y }) => {
+      const nx = (cos * (x - Ox)) + (sin * (y - Oy)) + Ox;
+      const ny = (cos * (y - Oy)) - (sin * (x - Ox)) + Oy;
+      return {
+        x: Math.round(nx),
+        y: Math.round(ny),
+      };
     });
-    this.handlePChange(newPoints);
-  }
+    this.handlePChange(coordinates);
+  };
 
-  handleDragMove = (e) => {
-    const { points } = this.state;
-    const newPoints = [...points];
-    if (e.target.x() >= 1 && e.target.x() <= 435) {
-      newPoints[0].x = e.target.x();
-    }
-    if (e.target.y() >= 30 && e.target.y() <= 435) {
-      newPoints[0].y = e.target.y();
-    }
+  handleDragMove = (e, i) => {
+    const { triangles } = this.props;
+    const newPoints = [...triangles];
+    newPoints[i].x = e.target.x();
+    newPoints[i].y = e.target.y();
     this.handlePChange(newPoints);
   };
 
-  handleDragMoveOne = (e) => {
-    const { points } = this.state;
-    const newPoints = [...points];
-    if (e.target.x() >= 1 && e.target.x() <= 435) {
-      newPoints[1].x = e.target.x();
-    }
-    if (e.target.y() >= 30 && e.target.y() <= 435) {
-      newPoints[1].y = e.target.y();
-    }
-    this.handlePChange(newPoints);
-  };
-
-  handleDragMoveTwo = (e) => {
-    const { points } = this.state;
-    const newPoints = [...points];
-    if (e.target.x() >= 1 && e.target.x() <= 435) {
-      newPoints[2].x = e.target.x();
-    }
-    if (e.target.y() >= 30 && e.target.y() <= 435) {
-      newPoints[2].y = e.target.y();
-    }
-    this.handlePChange(newPoints);
-  };
-
-  handlePChange(coordinates) {
+  handlePChange = (coordinates) => {
     const { updateDimensions } = this.props;
-    this.setState({ points: coordinates });
-    updateDimensions(coordinates);
-  }
+    let gridOverflow = false;
+    coordinates.forEach(({ x, y }) => {
+      if (x < 0 || x > 435 || y < 0 || y > 435) {
+        gridOverflow = true;
+      }
+    });
+    if (!gridOverflow) {
+      updateDimensions(coordinates);
+    }
+  };
+
+  checkBoundaries = ({ x, y }) => {
+    let newX = x < 0 ? 0 : x;
+    newX = x >= 435 ? 435 : newX;
+    let newY = y < 0 ? 0 : y;
+    newY = y >= 435 ? 435 : newY;
+    return {
+      x: newX,
+      y: newY,
+    };
+  };
 
   render() {
-    const { points } = this.state;
     const {
-      node, color, clax, t,
+      node,
+      color,
+      t,
+      clax,
+      message,
+      triangles,
     } = this.props;
-
     return (
-      <Row className="relative">
-        <Col md="6" className="right-border pt-4">
-          <CardTitle>
-            <span>
-              {t('triangle')}&nbsp;
-              <strong>{`${node.A}${node.B}${node.C}`}</strong>
-              &nbsp;
-              {t('coordinates')}
-            </span>
-          </CardTitle>
-          <FormViews
-            handlePChange={this.handlePChange}
-            node={node}
-            points={points}
-            t={t}
-          />
+      <Row className={`${clax} Dimentions relative`}>
+        <Col className="right-border pt-4">
+          <Row>
+            <Col>
+              <CardTitle>
+                <span>
+                  {t('triangle')}&nbsp;
+                  <strong>{`${node.A}${node.B}${node.C}`}</strong>
+                  &nbsp;
+                  {t('coordinates')}
+                </span>
+              </CardTitle>
+              <FormViews
+                handlePChange={this.handlePChange}
+                node={node}
+                points={triangles}
+                t={t}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Row>
+                <Col>
+                  <Button size="sm" onClick={e => this.handleShift(e, 0, -20)} className="primary-blued">
+                    <FontAwesomeIcon icon="chevron-up" size="sm" fixedWidth />
+                  </Button>
+                  <Button size="sm" onClick={e => this.handleShift(e, 0, 20)} className="primary-blued">
+                    <FontAwesomeIcon icon="chevron-up" size="sm" fixedWidth rotation={180} />
+                  </Button>
+                  <Button size="sm" onClick={e => this.handleShift(e, -20, 0)} className="primary-blued">
+                    <FontAwesomeIcon icon="chevron-up" size="sm" fixedWidth rotation={270} />
+                  </Button>
+                  <Button size="sm" onClick={e => this.handleShift(e, 20, 0)} className="primary-blued">
+                    <FontAwesomeIcon icon="chevron-up" size="sm" fixedWidth rotation={90} />
+                  </Button>
+                  <Button size="sm" className="primary-blued" onClick={e => this.handleRotate('cw', e)}>
+                    <FontAwesomeIcon icon="redo" size="sm" fixedWidth />
+                  </Button>
+                  <Button size="sm" className="primary-blued" onClick={e => this.handleRotate('ccw', e)}>
+                    <FontAwesomeIcon icon="undo" size="sm" fixedWidth />
+                  </Button>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
         </Col>
-        <Col md="6" className="pt-4">
-          <div className={clax}>
-            <Button size="sm" onClick={this.handleShiftLeft} className="primary-blued">
-              <FontAwesomeIcon icon="chevron-left" />
-            </Button>
-            <br />
-            <Button size="sm" className="mt-2 primary-blued realign" onClick={this.handleRotate} data-rotate="left">
-              <FontAwesomeIcon icon="redo" />
-            </Button>
-            <br />
-            <Button size="sm" className="my-2 primary-blued realign" onClick={this.handleRotate} data-rotate="right">
-              <FontAwesomeIcon icon="undo" />
-            </Button>
-            <br />
-            <Button size="sm" onClick={this.handleShiftRight} className="primary-blued">
-              <FontAwesomeIcon icon="chevron-right" />
-            </Button>
-          </div>
+        <Col>
+          { message && <h5>{t('drag')}</h5>}
           <Stage width="450" height="450">
             <Tri
               points={
                 [
-                  { x: points[0].x, y: points[0].y },
-                  { x: points[1].x, y: points[1].y },
-                  { x: points[2].x, y: points[2].y },
+                  { x: triangles[0].x, y: triangles[0].y },
+                  { x: triangles[1].x, y: triangles[1].y },
+                  { x: triangles[2].x, y: triangles[2].y },
                 ]
               }
               color={color}
               node={node}
-              handleDragMove={this.handleDragMove}
-              handleDragMoveOne={this.handleDragMoveOne}
-              handleDragMoveTwo={this.handleDragMoveTwo}
+              handleDragMove={e => this.handleDragMove(e, 0)}
+              handleDragMoveOne={e => this.handleDragMove(e, 1)}
+              handleDragMoveTwo={e => this.handleDragMove(e, 2)}
+              checkBoundaries={this.checkBoundaries}
             />
           </Stage>
         </Col>
