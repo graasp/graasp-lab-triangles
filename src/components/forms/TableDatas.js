@@ -14,7 +14,7 @@ const TableDatas = ({
       <InputGroupAddon addonType="prepend">
         <InputGroupText>{name}</InputGroupText>
       </InputGroupAddon>
-      <Input type="number" min="0" max="300" data-index={index} data-axis={axis} value={points} onChange={handlePointChange} />
+      <Input type="number" min="0" max="435" data-index={index} data-axis={axis} value={points} onChange={handlePointChange} />
     </InputGroup>
   </td>
 );
