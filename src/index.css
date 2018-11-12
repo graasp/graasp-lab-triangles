@@ -60,6 +60,7 @@ body {
 }
 
 .primary-blued {
+  margin: 5px;
   background-color: rgb(29,103, 189);
   color: #fff;
 }

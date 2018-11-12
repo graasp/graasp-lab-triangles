@@ -11,13 +11,13 @@ class SimulationButtons extends Component {
       triOne: PropTypes.array.isRequired,
       triTwo: PropTypes.array.isRequired,
     }).isRequired,
-  }
+  };
 
   constructor(props) {
     super(props);
+    const { flashed } = props;
     this.state = {
-      t: props.t,
-      flashed: props.flashed,
+      flashed,
       visible: true,
       success: {
         value1: '',
@@ -25,11 +25,6 @@ class SimulationButtons extends Component {
         value3: '',
       },
     };
-    this.onDismiss = this.onDismiss.bind(this);
-  }
-
-  onDismiss() {
-    this.setState({ visible: false });
   }
 
   handleSimulate = () => {
@@ -94,10 +89,11 @@ class SimulationButtons extends Component {
       },
       flashed: true,
     });
-  }
+  };
 
   handleMessage = (value1, value2, value3) => {
-    const { visible, t } = this.state;
+    const { visible } = this.state;
+    const { t } = this.props;
     if (value1 === value2 && value2 === value3) {
       return (
         <Alert color="success" isOpen={visible}>
@@ -120,10 +116,11 @@ class SimulationButtons extends Component {
         <strong>{t('similar')}</strong>
       </Alert>
     );
-  }
+  };
 
   render() {
-    const { success, flashed, t } = this.state;
+    const { success, flashed } = this.state;
+    const { t } = this.props;
     const { value1, value2, value3 } = success;
     return (
       <div className="pt-3">
@@ -133,7 +130,7 @@ class SimulationButtons extends Component {
           </div>
         </Row>
         <div className="ml-3 mt-3">
-          <Button className="primary-blued p-3 mr-5 compare-btn" onClick={this.handleSimulate}>{t('compare')}</Button>
+          <Button className="primary-blued p-3 mr-4 compare-btn" onClick={this.handleSimulate}>{t('compare')}</Button>
         </div>
       </div>
     );

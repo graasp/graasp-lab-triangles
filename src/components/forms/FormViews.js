@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Table } from 'reactstrap';
 import TableDatas from './TableDatas';
 
-class FormViews extends Component {
+export class FormViews extends Component {
   static propTypes = {
     t: PropTypes.func.isRequired,
     handlePChange: PropTypes.func.isRequired,
@@ -16,35 +16,23 @@ class FormViews extends Component {
       B: PropTypes.string.isRequired,
       C: PropTypes.string.isRequired,
     }).isRequired,
-  }
-
-  constructor(props) {
-    super(props);
-    const { points } = props;
-    this.state = {
-      points,
-    };
-  }
+  };
 
   handlePointChange = (event) => {
     event.preventDefault();
-    if (event.target.value === '') {
-      event.target.value = 0; // eslint-disable-line no-param-reassign
-    }
-    if (event.target.value > 300) {
-      event.target.value = 300; // eslint-disable-line no-param-reassign
-    }
-    const { handlePChange } = this.props;
-    const { points } = this.state;
-    const { dataset: { index, axis }, value } = event.target;
+    const { handlePChange, points } = this.props;
+    const { dataset: { index, axis } } = event.target;
+    let { value } = event.target;
     const newPoints = [...points];
+    if (value === '') {
+      value = 0;
+    }
     newPoints[index][axis] = Number.parseInt(value, 10);
     handlePChange(newPoints);
-  }
+  };
 
   render() {
-    const { node, t } = this.props;
-    const { points } = this.state;
+    const { node, t, points } = this.props;
     return (
       <div className="mt-3">
         <Table borderless>

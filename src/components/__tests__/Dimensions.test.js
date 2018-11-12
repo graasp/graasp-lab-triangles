@@ -1,7 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import {
+  Row,
+} from 'reactstrap';
 import Dimensions from '../forms/Dimensions';
-import FormViews from '../forms/FormViews';
+import { FormViews } from '../forms/FormViews';
 
 describe('render dimension components tests', () => {
   it('has one instance of dimension', () => {
@@ -23,24 +26,27 @@ describe('render dimension components tests', () => {
       updateDimensions: jest.fn(),
     };
     const wrapped = shallow(<Dimensions {...props} />);
-    expect(wrapped.find('div.class-One').length).toEqual(1);
+    expect(wrapped.find(Row).first().hasClass('class-One'));
   });
   it('has one instance of form view', () => {
     const props = {
       t: jest.fn(),
-      handlePChange: jest.fn(),
+      clax: 'class-One',
+      flashed: false,
+      color: 'rgb(29,103, 189)',
       node: {
         A: 'A',
         B: 'B',
         C: 'C',
       },
-      points: [
+      triangles: [
         { x: 20, y: 50 },
         { x: 20, y: 50 },
         { x: 20, y: 50 },
       ],
+      updateDimensions: jest.fn(),
     };
-    const wrapped = shallow(<FormViews {...props} />);
-    expect(wrapped.find('div.App').length).toEqual(0);
+    const wrapped = shallow(<Dimensions {...props} />);
+    expect(wrapped.find(FormViews).length).toEqual(1);
   });
 });
