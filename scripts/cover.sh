@@ -7,7 +7,7 @@ set -e
 yarn lint
 
 # run tests
-yarn test
+yarn test:ci
 TEST_EXIT_CODE=$?
 
 # report coverage
