@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.2.4"></a>
+## [0.2.4](https://github.com/graasp/graasp-app-triangles/compare/v0.2.3...v0.2.4) (2018-11-13)
+
+
+### Bug Fixes
+
+* fix issue with rows covering each other ([abca7a2](https://github.com/graasp/graasp-app-triangles/commit/abca7a2)), closes [#12](https://github.com/graasp/graasp-app-triangles/issues/12)
+
+
+
 <a name="0.2.3"></a>
 ## [0.2.3](https://github.com/graasp/graasp-app-triangles/compare/v0.2.2...v0.2.3) (2018-11-13)
 
