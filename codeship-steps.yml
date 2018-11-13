@@ -55,4 +55,4 @@
       command: yarn build:version
     - name: deploy-prod-version
       service: deploy-prod
-      command: /deploy/scripts/deploy.sh -b /deploy/build -v "{{.Branch}}"
+      command: bash -c '/deploy/scripts/deploy.sh -b /deploy/build -v $CI_BRANCH'
