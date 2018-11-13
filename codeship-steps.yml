@@ -23,7 +23,7 @@
       command: /deploy/scripts/deploy.sh -b /deploy/build
 
 # production: latest
-# -------
+# ------------------
 # runs when pushing a version tag and requires manual approval before deploying to production
 - type: manual
   name: prod-latest
@@ -40,7 +40,7 @@
       command: /deploy/scripts/deploy.sh -b /deploy/build
 
 # production: version
-# -------
+# -------------------
 # runs when pushing a version tag and requires manual approval before deploying to production
 - type: manual
   name: prod-version
