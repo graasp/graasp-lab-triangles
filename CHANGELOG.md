@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.2.2"></a>
+## [0.2.2](https://github.com/graasp/graasp-app-triangles/compare/v0.2.1...v0.2.2) (2018-11-13)
+
+
+### Bug Fixes
+
+* pass correct version to deploy command ([4137f54](https://github.com/graasp/graasp-app-triangles/commit/4137f54)), closes [#10](https://github.com/graasp/graasp-app-triangles/issues/10)
+
+
+
 <a name="0.2.1"></a>
 ## [0.2.1](https://github.com/graasp/graasp-app-triangles/compare/v0.2.0...v0.2.1) (2018-11-13)
 
