@@ -7,12 +7,10 @@ import {
   Row,
 } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// todo: check solution to remove suppression
-// eslint-disable-next-line no-unused-vars
-import { faCoffee } from '@fortawesome/fontawesome-free-solid';
 import { Stage } from 'react-konva';
 import Tri from '../preview/Tri';
 import FormViews from './FormViews';
+import '@fortawesome/fontawesome-free-solid';
 import './Dimensions.css';
 
 class Dimensions extends Component {
@@ -108,74 +106,123 @@ class Dimensions extends Component {
       triangles,
     } = this.props;
     return (
-      <Row className={`${clax} Dimentions relative`}>
-        <Col className="right-border pt-4">
-          <Row>
-            <Col>
-              <CardTitle>
-                <span>
-                  {t('triangle')}&nbsp;
-                  <strong>{`${node.A}${node.B}${node.C}`}</strong>
-                  &nbsp;
-                  {t('coordinates')}
-                </span>
-              </CardTitle>
-              <FormViews
-                handlePChange={this.handlePChange}
+      <div className="Dimensions">
+        <Row className={clax}>
+          <Col className="right-border pt-4">
+            <Row>
+              <Col>
+                <CardTitle>
+                  <span>
+                    {t('triangle')}&nbsp;
+                    <strong>{`${node.A}${node.B}${node.C}`}</strong>
+                    &nbsp;
+                    {t('coordinates')}
+                  </span>
+                </CardTitle>
+                <FormViews
+                  handlePChange={this.handlePChange}
+                  node={node}
+                  points={triangles}
+                  t={t}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <Row>
+                  <Col>
+                    <Button
+                      size="sm"
+                      onClick={e => this.handleShift(e, 0, -20)}
+                      className="primary-blued"
+                    >
+                      <FontAwesomeIcon
+                        icon="chevron-up"
+                        size="sm"
+                        fixedWidth
+                      />
+                    </Button>
+                    <Button
+                      size="sm"
+                      onClick={e => this.handleShift(e, 0, 20)}
+                      className="primary-blued"
+                    >
+                      <FontAwesomeIcon
+                        icon="chevron-up"
+                        size="sm"
+                        fixedWidth
+                        rotation={180}
+                      />
+                    </Button>
+                    <Button
+                      size="sm"
+                      onClick={e => this.handleShift(e, -20, 0)}
+                      className="primary-blued"
+                    >
+                      <FontAwesomeIcon
+                        icon="chevron-up"
+                        size="sm"
+                        fixedWidth
+                        rotation={270}
+                      />
+                    </Button>
+                    <Button
+                      size="sm"
+                      onClick={e => this.handleShift(e, 20, 0)}
+                      className="primary-blued"
+                    >
+                      <FontAwesomeIcon
+                        icon="chevron-up"
+                        size="sm"
+                        fixedWidth
+                        rotation={90}
+                      />
+                    </Button>
+                    <Button
+                      size="sm"
+                      className="primary-blued"
+                      onClick={e => this.handleRotate('cw', e)}
+                    >
+                      <FontAwesomeIcon
+                        icon="redo"
+                        size="sm"
+                        fixedWidth
+                      />
+                    </Button>
+                    <Button
+                      size="sm"
+                      className="primary-blued"
+                      onClick={e => this.handleRotate('ccw', e)}
+                    >
+                      <FontAwesomeIcon icon="undo" size="sm" fixedWidth />
+                    </Button>
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+          </Col>
+          <Col>
+            { message && <h5>{t('drag')}</h5>}
+            <Stage width="450" height="450">
+              <Tri
+                points={
+                  [
+                    { x: triangles[0].x, y: triangles[0].y },
+                    { x: triangles[1].x, y: triangles[1].y },
+                    { x: triangles[2].x, y: triangles[2].y },
+                  ]
+                }
+                color={color}
                 node={node}
-                points={triangles}
-                t={t}
+                handleDragMove={e => this.handleDragMove(e, 0)}
+                handleDragMoveOne={e => this.handleDragMove(e, 1)}
+                handleDragMoveTwo={e => this.handleDragMove(e, 2)}
+                checkBoundaries={this.checkBoundaries}
               />
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Row>
-                <Col>
-                  <Button size="sm" onClick={e => this.handleShift(e, 0, -20)} className="primary-blued">
-                    <FontAwesomeIcon icon="chevron-up" size="sm" fixedWidth />
-                  </Button>
-                  <Button size="sm" onClick={e => this.handleShift(e, 0, 20)} className="primary-blued">
-                    <FontAwesomeIcon icon="chevron-up" size="sm" fixedWidth rotation={180} />
-                  </Button>
-                  <Button size="sm" onClick={e => this.handleShift(e, -20, 0)} className="primary-blued">
-                    <FontAwesomeIcon icon="chevron-up" size="sm" fixedWidth rotation={270} />
-                  </Button>
-                  <Button size="sm" onClick={e => this.handleShift(e, 20, 0)} className="primary-blued">
-                    <FontAwesomeIcon icon="chevron-up" size="sm" fixedWidth rotation={90} />
-                  </Button>
-                  <Button size="sm" className="primary-blued" onClick={e => this.handleRotate('cw', e)}>
-                    <FontAwesomeIcon icon="redo" size="sm" fixedWidth />
-                  </Button>
-                  <Button size="sm" className="primary-blued" onClick={e => this.handleRotate('ccw', e)}>
-                    <FontAwesomeIcon icon="undo" size="sm" fixedWidth />
-                  </Button>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-        </Col>
-        <Col>
-          { message && <h5>{t('drag')}</h5>}
-          <Stage width="450" height="450">
-            <Tri
-              points={
-                [
-                  { x: triangles[0].x, y: triangles[0].y },
-                  { x: triangles[1].x, y: triangles[1].y },
-                  { x: triangles[2].x, y: triangles[2].y },
-                ]
-              }
-              color={color}
-              node={node}
-              handleDragMove={e => this.handleDragMove(e, 0)}
-              handleDragMoveOne={e => this.handleDragMove(e, 1)}
-              handleDragMoveTwo={e => this.handleDragMove(e, 2)}
-              checkBoundaries={this.checkBoundaries}
-            />
-          </Stage>
-        </Col>
-      </Row>
+            </Stage>
+          </Col>
+        </Row>
+      </div>
     );
   }
 }
