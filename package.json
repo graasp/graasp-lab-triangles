@@ -39,7 +39,7 @@
     "build": "react-scripts build",
     "build:dev": "env-cmd ./.env.dev react-scripts build",
     "build:prod": "env-cmd ./.env.prod react-scripts build",
-    "build:version": "REACT_APP_VERSION=$CI_BRANCH env-cmd ./.env.prod react-scripts build",
+    "build:version": "REACT_APP_VERSION=$CI_BRANCH env-cmd --no-override ./.env.prod react-scripts build",
     "lint": "eslint .",
     "test": "react-scripts test --env=jsdom",
     "test:ci": "cross-env CI=true env-cmd ./.env.test react-scripts test --env=jsdom --coverage",

@@ -20,7 +20,7 @@ validate_version() {
   rx='^v([0-9]+\.){0,2}(\*|[0-9]+)$'
   if [[ $1 =~ $rx ]]; then
     echo "info: validated version $1"
-    VERSION=$1
+    REACT_APP_VERSION=$1
   else
     echo "error: unable to validate version '$1'" 1>&2
     echo "format is '${rx}'"
