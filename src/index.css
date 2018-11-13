@@ -54,11 +54,6 @@ body {
   line-height: 2;
 }
 
-.class-One, .class-Two {
-  top: 20%;
-  position: absolute;
-}
-
 .primary-blued {
   margin: 5px;
   background-color: rgb(29,103, 189);
@@ -68,10 +63,6 @@ body {
 .primary-blued:hover {
   background-color: rgb(14, 76, 148);
   color: #fff;
-}
-
-.relative {
-  position: relative;
 }
 
 .realign {

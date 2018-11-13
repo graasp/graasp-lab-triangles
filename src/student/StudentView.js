@@ -51,8 +51,15 @@ class StudentView extends Component {
 
   render() {
     const {
-      classOne, classTwo, flashed, triOne, triTwo, nodeOne,
-      nodeTwo, colorOne, colorTwo,
+      classOne,
+      classTwo,
+      flashed,
+      triOne,
+      triTwo,
+      nodeOne,
+      nodeTwo,
+      colorOne,
+      colorTwo,
     } = this.state;
     const { t } = this.props;
     return (
@@ -60,12 +67,29 @@ class StudentView extends Component {
         <div className="App-body mx-5">
           <Row>
             <Col>
-              <Dimensions t={t} triangles={triOne} name="triOne" updateDimensions={this.updateDimensionsOne} node={nodeOne} color={colorOne} clax={classOne} message />
+              <Dimensions
+                t={t}
+                triangles={triOne}
+                name="triOne"
+                updateDimensions={this.updateDimensionsOne}
+                node={nodeOne}
+                color={colorOne}
+                clax={classOne}
+                message
+              />
             </Col>
           </Row>
           <Row>
             <Col>
-              <Dimensions t={t} triangles={triTwo} name="triTwo" updateDimensions={this.updateDimensionsTwo} node={nodeTwo} color={colorTwo} clax={classTwo} />
+              <Dimensions
+                t={t}
+                triangles={triTwo}
+                name="triTwo"
+                updateDimensions={this.updateDimensionsTwo}
+                node={nodeTwo}
+                color={colorTwo}
+                clax={classTwo}
+              />
             </Col>
           </Row>
           <Row>

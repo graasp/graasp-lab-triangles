@@ -1,7 +1,7 @@
 .controls {
-  padding: 0px 2px;
+  padding: 0 2px;
 }
 
-.Dimentions {
-  margin-bottom: 20px;
+.Dimensions {
+  border-bottom: 1rem solid darkgray;
 }
