@@ -39,15 +39,18 @@ export class FormViews extends Component {
           <thead>
             <tr>
               <th>
-                {t('point')}&nbsp;
+                {t('point')}
+                &nbsp;
                 {node.A}
               </th>
               <th>
-                {t('point')}&nbsp;
+                {t('point')}
+                &nbsp;
                 {node.B}
               </th>
               <th>
-                {t('point')}&nbsp;
+                {t('point')}
+                &nbsp;
                 {node.C}
               </th>
             </tr>

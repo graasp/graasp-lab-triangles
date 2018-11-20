@@ -113,7 +113,8 @@ class Dimensions extends Component {
               <Col>
                 <CardTitle>
                   <span>
-                    {t('triangle')}&nbsp;
+                    {t('triangle')}
+                    &nbsp;
                     <strong>{`${node.A}${node.B}${node.C}`}</strong>
                     &nbsp;
                     {t('coordinates')}
