@@ -97,22 +97,33 @@ class SimulationButtons extends Component {
     if (value1 === value2 && value2 === value3) {
       return (
         <Alert color="success" isOpen={visible}>
-          {t('triangles')}&nbsp;
+          {t('triangles')}
+          &nbsp;
           <strong>ABC</strong>
-          &nbsp;{t('and')}&nbsp;
+          &nbsp;
+          {t('and')}
+          &nbsp;
           <strong>DEF</strong>
-          &nbsp;{t('are')}&nbsp;
+          &nbsp;
+          {t('are')}
+          &nbsp;
           <strong>{t('similar')}</strong>
         </Alert>
       );
     }
     return (
       <Alert color="danger" isOpen={visible}>
-        {t('triangles')}&nbsp;
+        {t('triangles')}
+        &nbsp;
         <strong>ABC</strong>
-        &nbsp;{t('and')}&nbsp;
+        &nbsp;
+        {t('and')}
+        &nbsp;
         <strong>DEF</strong>
-        &nbsp;{t('arenot')} &nbsp;
+        &nbsp;
+        {t('arenot')}
+        {' '}
+        &nbsp;
         <strong>{t('similar')}</strong>
       </Alert>
     );

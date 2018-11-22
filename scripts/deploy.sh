@@ -120,4 +120,4 @@ aws s3 sync ${BUILD} s3://${APP_DIR} --delete
 #fi
 
 # invalidate cloudfront distribution
-# aws cloudfront create-invalidation --distribution-id ${DISTRIBUTION} --paths /${APP_PATH}
+# aws cloudfront create-invalidation --distribution-id ${DISTRIBUTION} --paths /${APP_PATH}/*
