@@ -1,28 +1,23 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   Layer,
   Line,
   Stage,
   useStrictMode,
 } from 'react-konva';
+import { connect } from 'react-redux';
+import 'react-toastify/dist/ReactToastify.css';
 import AppState from '../config/AppState';
 import Tri from './preview/Tri';
+import SimulationButtons from './common/SimulationButtons';
+import { toggleDragMode } from '../actions';
 
 class Visualizer extends Component {
   state = AppState;
 
   componentDidMount() {
     useStrictMode(true);
-  }
-
-  handleDragEnd = (e) => {
-    const { circlePoints, blockSnapSize } = this.state;
-    const newCirclePoints = [...circlePoints];
-    const newCircle = newCirclePoints.map(() => ({
-      x: Math.round(e.target.x() / blockSnapSize) * blockSnapSize,
-      y: Math.round(e.target.y() / blockSnapSize) * blockSnapSize,
-    }));
-    this.setState({ circlePoints: newCircle });
   }
 
   renderVerticalGrid = () => {
@@ -63,35 +58,6 @@ class Visualizer extends Component {
     return lines;
   }
 
-  handleShift = (e, stepX, stepY) => {
-    const { triOne } = this.state;
-    const newPoints = [...triOne];
-    const coordinates = newPoints.map(({ x, y }) => ({
-      x: x + stepX,
-      y: y + stepY,
-    }));
-    this.handlePChange(coordinates);
-  };
-
-  handleRotate = (orientation) => {
-    const { triOne } = this.state;
-    const newPoints = [...triOne];
-    const Ox = (newPoints[0].x + newPoints[1].x + newPoints[2].x) / 3;
-    const Oy = (newPoints[0].y + newPoints[1].y + newPoints[2].y) / 3;
-    const radians = orientation === 'ccw' ? (Math.PI / 180) * 90 : (Math.PI / 180) * (-90);
-    const cos = Math.cos(radians);
-    const sin = Math.sin(radians);
-    const coordinates = newPoints.map(({ x, y }) => {
-      const nx = (cos * (x - Ox)) + (sin * (y - Oy)) + Ox;
-      const ny = (cos * (y - Oy)) - (sin * (x - Ox)) + Oy;
-      return {
-        x: Math.round(nx),
-        y: Math.round(ny),
-      };
-    });
-    this.handlePChange(coordinates);
-  };
-
   handleDragMove = (e, i, kind) => {
     const { triOne, triTwo, blockSnapSize } = this.state;
     const currentTriangle = kind === 'triangleOne' ? triOne : triTwo;
@@ -99,10 +65,14 @@ class Visualizer extends Component {
     newPoints[i].x = Math.round(e.target.x() / blockSnapSize) * blockSnapSize;
     newPoints[i].y = Math.round(e.target.y() / blockSnapSize) * blockSnapSize;
     this.handlePChange(newPoints, kind);
+    const { dispatchisDragging } = this.props;
+    dispatchisDragging(true);
   };
 
   handlePChange = (coordinates, kind) => {
     let gridOverflow = false;
+    const { dispatchisDragging } = this.props;
+    dispatchisDragging(false);
     coordinates.forEach(({ x, y }) => {
       if (x < 0 || x > 1400 || y < 0 || y > 1200) {
         gridOverflow = true;
@@ -150,6 +120,8 @@ class Visualizer extends Component {
     } = this.state;
     return (
       <div className="description-component">
+        <SimulationButtons triangles={{ triOne, triTwo }} />
+
         <Stage width={window.innerWidth} height={window.innerHeight}>
           <Layer>
             {this.renderVerticalGrid()}
@@ -205,6 +177,18 @@ class Visualizer extends Component {
   }
 }
 
-Visualizer.propTypes = {};
+const mapStateToProps = state => ({
+  dragMode: state.simulation.dragMode,
+});
 
-export default Visualizer;
+const mapDispatchToProps = {
+  dispatchisDragging: toggleDragMode,
+};
+
+const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(Visualizer);
+
+Visualizer.propTypes = {
+  dispatchisDragging: PropTypes.func.isRequired,
+};
+
+export default ConnectedComponent;
