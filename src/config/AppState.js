@@ -1,13 +1,12 @@
 export const AppState = {
-  showTitle: true,
+  openModal: false,
+  isMoving: false,
   isMouseInsideCircleOne: false,
   isMouseInsideCircleTwo: false,
   isMouseInsideCircleThree: false,
-  openModal: false,
   blockSnapSize: 50,
   classOne: 'class-One',
   classTwo: 'class-Two',
-  flashed: false,
   colorOne: 'rgb(29,103, 189)',
   colorTwo: 'rgb(29,103, 189)',
   triOne: [
