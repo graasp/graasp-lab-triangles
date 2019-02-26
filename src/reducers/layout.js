@@ -11,6 +11,8 @@ const INITIAL_STATE = {
   showSideMenu: false,
   showNerve: false,
   showLoader: true,
+  dragMode: false,
+  finalResults: null,
 };
 
 export default (state = INITIAL_STATE, { type, payload }) => {
