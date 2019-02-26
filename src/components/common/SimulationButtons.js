@@ -1,31 +1,27 @@
 import React, { Component } from 'react';
-import { Alert, Button, Row } from 'reactstrap';
+import { Button } from 'reactstrap';
+import { withTranslation } from 'react-i18next';
+import { connect } from 'react-redux';
+import { toast, ToastContainer } from 'react-toastify';
 import PropTypes from 'prop-types';
 import Big from 'big.js';
+import Notificator from './Notificator';
+import { shareFinalResults } from '../../actions';
+import './Style.css';
 
 class SimulationButtons extends Component {
   static propTypes = {
+    themeColor: PropTypes.string.isRequired,
+    dragMode: PropTypes.bool.isRequired,
     t: PropTypes.func.isRequired,
-    flashed: PropTypes.bool.isRequired,
+    dispatchFinalResult: PropTypes.func.isRequired,
     triangles: PropTypes.shape({
       triOne: PropTypes.array.isRequired,
       triTwo: PropTypes.array.isRequired,
     }).isRequired,
   };
 
-  constructor(props) {
-    super(props);
-    const { flashed } = props;
-    this.state = {
-      flashed,
-      visible: true,
-      success: {
-        value1: '',
-        value2: '',
-        value3: '',
-      },
-    };
-  }
+  notifySuccess = () => toast(<Notificator />, { position: toast.POSITION.BOTTOM_LEFT });
 
   handleSimulate = () => {
     const { triangles: { triOne, triTwo } } = this.props;
@@ -81,60 +77,38 @@ class SimulationButtons extends Component {
     const value1 = dAB.div(dABprim);
     const value2 = dAC.div(dACprim);
     const value3 = dBC.div(dBCprim);
-    this.setState({
-      success: {
-        value1: value1.toString(),
-        value2: value2.toString(),
-        value3: value3.toString(),
-      },
-      flashed: true,
+    const { dispatchFinalResult } = this.props;
+    dispatchFinalResult({
+      value1: value1.toString(),
+      value2: value2.toString(),
+      value3: value3.toString(),
     });
-  };
-
-  handleMessage = (value1, value2, value3) => {
-    const { visible } = this.state;
-    const { t } = this.props;
-    if (value1 === value2 && value2 === value3) {
-      return (
-        <Alert color="success" isOpen={visible}>
-          {t('triangles')}&nbsp;
-          <strong>ABC</strong>
-          &nbsp;{t('and')}&nbsp;
-          <strong>DEF</strong>
-          &nbsp;{t('are')}&nbsp;
-          <strong>{t('similar')}</strong>
-        </Alert>
-      );
-    }
-    return (
-      <Alert color="danger" isOpen={visible}>
-        {t('triangles')}&nbsp;
-        <strong>ABC</strong>
-        &nbsp;{t('and')}&nbsp;
-        <strong>DEF</strong>
-        &nbsp;{t('arenot')} &nbsp;
-        <strong>{t('similar')}</strong>
-      </Alert>
-    );
+    this.notifySuccess();
   };
 
   render() {
-    const { success, flashed } = this.state;
-    const { t } = this.props;
-    const { value1, value2, value3 } = success;
+    const { dragMode, t, themeColor } = this.props;
     return (
-      <div className="pt-3">
-        <Row>
-          <div className="mx-auto">
-            {flashed ? this.handleMessage(value1, value2, value3) : ''}
-          </div>
-        </Row>
-        <div className="ml-3 mt-3">
-          <Button className="primary-blued p-3 mr-4 compare-btn" onClick={this.handleSimulate}>{t('compare')}</Button>
-        </div>
+      <div>
+        { dragMode
+          ? <ToastContainer autoClose={false} /> : ''
+        }
+        <Button style={{ backgroundColor: themeColor, borderColor: themeColor }} className="compare-btn" onClick={this.handleSimulate}>{t('compare')}</Button>
       </div>
     );
   }
 }
 
-export default SimulationButtons;
+const mapDispatchToProps = {
+  dispatchFinalResult: shareFinalResults,
+};
+
+const mapStateToProps = state => ({
+  finalResults: state.simulation.finalResults,
+  dragMode: state.simulation.dragMode,
+  themeColor: state.layout.themeColor,
+});
+
+const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(SimulationButtons);
+
+export default withTranslation()(ConnectedComponent);
