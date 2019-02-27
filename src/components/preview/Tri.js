@@ -19,6 +19,8 @@ const Tri = ({
   strokeWidthTwo,
   strokeWidthThree,
   radiusOne,
+  radiusTwo,
+  radiusThree,
 }) => (
   <Fragment>
     <Shape
@@ -39,7 +41,7 @@ const Tri = ({
       x={points[0].x}
       y={points[0].y}
       radius={radiusOne}
-      fill={color}
+      fill="#64DD17"
       stroke="#555"
       strokeWidth={strokeWidthOne}
       shadowBlur={5}
@@ -52,8 +54,8 @@ const Tri = ({
     <Circle
       x={points[1].x}
       y={points[1].y}
-      radius={5}
-      fill={color}
+      radius={radiusTwo}
+      fill="#E65100"
       stroke="#555"
       strokeWidth={strokeWidthTwo}
       shadowBlur={5}
@@ -66,8 +68,8 @@ const Tri = ({
     <Circle
       x={points[2].x}
       y={points[2].y}
-      radius={5}
-      fill={color}
+      radius={radiusThree}
+      fill="#000000"
       stroke="#555"
       strokeWidth={strokeWidthThree}
       shadowBlur={5}
@@ -105,6 +107,8 @@ Tri.propTypes = {
   color: PropTypes.string.isRequired,
   stroke: PropTypes.string.isRequired,
   radiusOne: PropTypes.number.isRequired,
+  radiusTwo: PropTypes.number.isRequired,
+  radiusThree: PropTypes.number.isRequired,
   strokeWidthOne: PropTypes.number.isRequired,
   strokeWidthTwo: PropTypes.number.isRequired,
   strokeWidthThree: PropTypes.number.isRequired,

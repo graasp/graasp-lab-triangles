@@ -138,6 +138,8 @@ class Visualizer extends Component {
               stroke="#a05050"
               node={nodeOne}
               radiusOne={isMouseInsideCircleOne ? 10 : 5}
+              radiusTwo={isMouseInsideCircleTwo ? 10 : 5}
+              radiusThree={isMouseInsideCircleThree ? 10 : 5}
               strokeWidthOne={isMouseInsideCircleOne ? 2 : 0.5}
               strokeWidthTwo={isMouseInsideCircleTwo ? 2 : 0.5}
               strokeWidthThree={isMouseInsideCircleThree ? 2 : 0.5}
@@ -160,6 +162,8 @@ class Visualizer extends Component {
               stroke="rgb(0, 150, 136)"
               node={nodeTwo}
               radiusOne={isMouseInsideCircleOne ? 10 : 5}
+              radiusTwo={isMouseInsideCircleTwo ? 10 : 5}
+              radiusThree={isMouseInsideCircleThree ? 10 : 5}
               strokeWidthOne={isMouseInsideCircleOne ? 2 : 0.5}
               strokeWidthTwo={isMouseInsideCircleTwo ? 2 : 0.5}
               strokeWidthThree={isMouseInsideCircleThree ? 2 : 0.5}
