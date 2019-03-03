@@ -13,6 +13,7 @@ class SimulationButtons extends Component {
   static propTypes = {
     themeColor: PropTypes.string.isRequired,
     dragMode: PropTypes.bool.isRequired,
+    showHeader: PropTypes.bool.isRequired,
     t: PropTypes.func.isRequired,
     dispatchFinalResult: PropTypes.func.isRequired,
     triangles: PropTypes.shape({
@@ -87,26 +88,36 @@ class SimulationButtons extends Component {
   };
 
   render() {
-    const { dragMode, t, themeColor } = this.props;
+    const {
+      dragMode,
+      showHeader,
+      t,
+      themeColor,
+    } = this.props;
     return (
-      <div>
+      <div className={`${!showHeader ? 'left-margin' : ''}`}>
         { dragMode
           ? <ToastContainer autoClose={false} /> : ''
         }
-        <Button style={{ backgroundColor: themeColor, borderColor: themeColor }} className="compare-btn" onClick={this.handleSimulate}>{t('compare')}</Button>
+        <Button
+          style={{ backgroundColor: themeColor, borderColor: themeColor }}
+          className="compare-btn"
+          onClick={this.handleSimulate}
+        >
+          {t('compare')}
+        </Button>
       </div>
     );
   }
 }
 
-const mapDispatchToProps = {
-  dispatchFinalResult: shareFinalResults,
-};
+const mapDispatchToProps = { dispatchFinalResult: shareFinalResults };
 
 const mapStateToProps = state => ({
   finalResults: state.simulation.finalResults,
   dragMode: state.simulation.dragMode,
   themeColor: state.layout.themeColor,
+  showHeader: state.layout.showHeader,
 });
 
 const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(SimulationButtons);
