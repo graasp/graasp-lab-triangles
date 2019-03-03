@@ -21,9 +21,9 @@ class Visualizer extends Component {
   }
 
   renderVerticalGrid = () => {
-    const width = window.innerWidth;
+    const width = window.innerWidth - 40;
     const height = window.innerHeight;
-    const { blockSnapSize } = this.state;
+    const { blockSnapSize, lineStroke } = this.state;
     const lines = [];
     const grouped = width / blockSnapSize;
     for (let i = 0; i < grouped; i += 1) {
@@ -31,7 +31,7 @@ class Visualizer extends Component {
         <Line
           key={i}
           points={[Math.round(i * blockSnapSize) + 1, 0, Math.round(i * blockSnapSize) + 1, height]}
-          stroke="#CCC"
+          stroke={lineStroke}
           strokeWidth={1}
         />,
       );
@@ -40,9 +40,9 @@ class Visualizer extends Component {
   }
 
   renderHorizontalGrid = () => {
-    const width = window.innerWidth;
+    const width = window.innerWidth - 90;
     const height = window.innerHeight;
-    const { blockSnapSize } = this.state;
+    const { blockSnapSize, lineStroke } = this.state;
     const lines = [];
     const grouped = height / blockSnapSize;
     for (let j = 0; j < grouped; j += 1) {
@@ -50,7 +50,7 @@ class Visualizer extends Component {
         <Line
           key={j}
           points={[0, Math.round(j * blockSnapSize), width, Math.round(j * blockSnapSize)]}
-          stroke="#CCC"
+          stroke={lineStroke}
           strokeWidth={1}
         />,
       );
@@ -117,6 +117,7 @@ class Visualizer extends Component {
       triOne, nodeOne, colorOne,
       triTwo, nodeTwo, colorTwo,
       isMouseInsideCircleOne, isMouseInsideCircleTwo, isMouseInsideCircleThree,
+      triOneStroke, triTwoStroke,
     } = this.state;
     return (
       <div className="description-component">
@@ -135,7 +136,7 @@ class Visualizer extends Component {
                 ]
               }
               color={colorOne}
-              stroke="#a05050"
+              stroke={triOneStroke}
               node={nodeOne}
               radiusOne={isMouseInsideCircleOne ? 10 : 5}
               radiusTwo={isMouseInsideCircleTwo ? 10 : 5}
@@ -159,7 +160,7 @@ class Visualizer extends Component {
                 ]
               }
               color={colorTwo}
-              stroke="rgb(0, 150, 136)"
+              stroke={triTwoStroke}
               node={nodeTwo}
               radiusOne={isMouseInsideCircleOne ? 10 : 5}
               radiusTwo={isMouseInsideCircleTwo ? 10 : 5}
