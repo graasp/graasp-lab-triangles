@@ -12,26 +12,37 @@ import AppState from '../config/AppState';
 import Tri from './preview/Tri';
 import SimulationButtons from './common/SimulationButtons';
 import { toggleDragMode } from '../actions';
+import {
+  BLOCK_SNAP_SIZE,
+  CANVAS_VIRTUAL_WIDTH,
+  CANVAS_VIRTUAL_HEIGHT,
+  LINE_STROKE,
+  HEIGHT,
+  WIDTH,
+} from '../config/constants';
 
 class Visualizer extends Component {
   state = AppState;
 
-  componentDidMount() {
-    useStrictMode(true);
-  }
+  componentDidMount() { useStrictMode(true); }
 
   renderVerticalGrid = () => {
-    const width = window.innerWidth - 40;
-    const height = window.innerHeight;
-    const { blockSnapSize, lineStroke } = this.state;
+    const width = WIDTH - 40;
     const lines = [];
-    const grouped = width / blockSnapSize;
+    const grouped = width / BLOCK_SNAP_SIZE;
     for (let i = 0; i < grouped; i += 1) {
       lines.push(
         <Line
           key={i}
-          points={[Math.round(i * blockSnapSize) + 1, 0, Math.round(i * blockSnapSize) + 1, height]}
-          stroke={lineStroke}
+          points={
+            [
+              Math.round(i * BLOCK_SNAP_SIZE) + 1,
+              0,
+              Math.round(i * BLOCK_SNAP_SIZE) + 1,
+              HEIGHT,
+            ]
+          }
+          stroke={LINE_STROKE}
           strokeWidth={1}
         />,
       );
@@ -40,17 +51,15 @@ class Visualizer extends Component {
   }
 
   renderHorizontalGrid = () => {
-    const width = window.innerWidth - 90;
-    const height = window.innerHeight;
-    const { blockSnapSize, lineStroke } = this.state;
+    const width = WIDTH - 90;
     const lines = [];
-    const grouped = height / blockSnapSize;
+    const grouped = HEIGHT / BLOCK_SNAP_SIZE;
     for (let j = 0; j < grouped; j += 1) {
       lines.push(
         <Line
           key={j}
-          points={[0, Math.round(j * blockSnapSize), width, Math.round(j * blockSnapSize)]}
-          stroke={lineStroke}
+          points={[0, Math.round(j * BLOCK_SNAP_SIZE), width, Math.round(j * BLOCK_SNAP_SIZE)]}
+          stroke={LINE_STROKE}
           strokeWidth={1}
         />,
       );
@@ -59,11 +68,11 @@ class Visualizer extends Component {
   }
 
   handleDragMove = (e, i, kind) => {
-    const { triOne, triTwo, blockSnapSize } = this.state;
+    const { triOne, triTwo } = this.state;
     const currentTriangle = kind === 'triangleOne' ? triOne : triTwo;
     const newPoints = [...currentTriangle];
-    newPoints[i].x = Math.round(e.target.x() / blockSnapSize) * blockSnapSize;
-    newPoints[i].y = Math.round(e.target.y() / blockSnapSize) * blockSnapSize;
+    newPoints[i].x = Math.round(e.target.x() / BLOCK_SNAP_SIZE) * BLOCK_SNAP_SIZE;
+    newPoints[i].y = Math.round(e.target.y() / BLOCK_SNAP_SIZE) * BLOCK_SNAP_SIZE;
     this.handlePChange(newPoints, kind);
     const { dispatchisDragging } = this.props;
     dispatchisDragging(true);
@@ -111,7 +120,6 @@ class Visualizer extends Component {
     if (circleKind === 'circleThree') this.setState({ isMouseInsideCircleThree: false });
   }
 
-
   render() {
     const {
       triOne, nodeOne, colorOne,
@@ -119,11 +127,17 @@ class Visualizer extends Component {
       isMouseInsideCircleOne, isMouseInsideCircleTwo, isMouseInsideCircleThree,
       triOneStroke, triTwoStroke,
     } = this.state;
+
+    const scale = Math.min(
+      WIDTH / CANVAS_VIRTUAL_WIDTH,
+      HEIGHT / CANVAS_VIRTUAL_HEIGHT,
+    );
+
     return (
       <div className="description-component">
         <SimulationButtons triangles={{ triOne, triTwo }} />
 
-        <Stage width={window.innerWidth} height={window.innerHeight}>
+        <Stage width={window.innerWidth} height={window.innerHeight} scaleX={scale} scaleY={scale}>
           <Layer>
             {this.renderVerticalGrid()}
             {this.renderHorizontalGrid()}
@@ -186,9 +200,7 @@ const mapStateToProps = state => ({
   dragMode: state.simulation.dragMode,
 });
 
-const mapDispatchToProps = {
-  dispatchisDragging: toggleDragMode,
-};
+const mapDispatchToProps = { dispatchisDragging: toggleDragMode };
 
 const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(Visualizer);
 
