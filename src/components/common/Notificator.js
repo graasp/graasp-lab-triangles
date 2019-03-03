@@ -1,22 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 
-const Notificator = ({ finalResults }) => (
+const Notificator = ({ finalResults, t }) => (
   <div>
     { finalResults.value1 === finalResults.value2 && finalResults.value2 === finalResults.value3
       ? (
         <p className="success-message">
-          SUCCESS::This stage is the moment when the LH and FSH are in normal quatity.
+          <span
+            aria-label="Success emoji"
+            role="img"
+            className="notification-badge"
+          >
+            😅
+          </span>
           <br />
-          This is the period before ovulation
+          {t('Success message')}
         </p>
       )
       : (
         <p className="failure-message">
-          FAILURE::This stage is the moment when the LH and FSH are in normal quatity.
+          <span
+            aria-label="Failure emoji"
+            role="img"
+            className="notification-badge"
+          >
+            😥
+          </span>
           <br />
-          This is the period before ovulation
+          {t('Failure message')}
         </p>
       )
     }
@@ -24,7 +37,8 @@ const Notificator = ({ finalResults }) => (
 );
 
 Notificator.propTypes = {
-  finalResults: PropTypes.bool.isRequired,
+  finalResults: PropTypes.shape({}).isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -33,4 +47,4 @@ const mapStateToProps = state => ({
 
 const ConnectedComponent = connect(mapStateToProps)(Notificator);
 
-export default ConnectedComponent;
+export default withTranslation()(ConnectedComponent);
