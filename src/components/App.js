@@ -107,13 +107,17 @@ export class App extends Component {
     }
 
     switch (mode) {
-      // show teacher view when in teacher mode
+      // show teacher view when in producer (educator) mode
       case 'teacher':
-        // TODO::the teacher view is empty for the moment
+      case 'producer':
+      case 'educator':
+      case 'admin':
         return <TeacherMode />;
 
-      // by default go with the student mode
+      // by default go with the consumer (learner) mode
       case 'student':
+      case 'consumer':
+      case 'learner':
       default:
         return <StudentMode />;
     }
