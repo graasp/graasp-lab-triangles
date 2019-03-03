@@ -4,9 +4,6 @@ export const AppState = {
   isMouseInsideCircleOne: false,
   isMouseInsideCircleTwo: false,
   isMouseInsideCircleThree: false,
-  blockSnapSize: 50,
-  classOne: 'class-One',
-  classTwo: 'class-Two',
   colorOne: 'rgb(29,103, 189)',
   colorTwo: 'rgb(29,103, 189)',
   triOne: [
@@ -29,6 +26,8 @@ export const AppState = {
     B: 'E',
     C: 'F',
   },
+  triOneStroke: '#a05050',
+  triTwoStroke: 'rgb(0, 150, 136)',
 };
 
 export default AppState;
