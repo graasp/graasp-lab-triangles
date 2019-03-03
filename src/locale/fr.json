@@ -18,6 +18,8 @@
     "teacherView": "Ceci est la vue de l'enseignant. Passez à la vue des étudiants en cliquant sur l’URL ci-dessous.",
     "Similar Triangles": "Triangles semblales",
     "Lab Explanation": "Le but de ce labo est d'amener les apprenants à pouvoir identifier les triangles semblables à partir des angles",
-    "Description": "Description"
+    "Description": "Description",
+    "Success message": "Les deux triangles sont semblables!",
+    "Failure message": "Ups! Les deux triangles ne sont pas semblables."
   }
 }

@@ -11,10 +11,10 @@
     "shift": "Shift",
     "rotate": "Rotate",
     "point": "Point",
-    "welcome": "Welcome to the Graasp App Starter Kit",
-    "teacherView": "This is the teacher view. Switch to the student view by clicking on the URL below.",
     "Similar Triangles": "Similar Triangles",
     "Lab Explanation": "The goal of this lab is to get learners to identify similar triangles from angles",
-    "Description": "Description"
+    "Description": "Description",
+    "Success message": "The two triangles are similar!",
+    "Failure message": "Ups! The two triangles are not similar."
   }
 }
