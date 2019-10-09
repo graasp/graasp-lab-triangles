@@ -4,12 +4,12 @@
 set -e
 
 usage() {
-  echo "usage: $0 [-e <path/to/file>] [-v <version string>] [-p] [-b <path/to/build>]" 1>&2
+  echo "usage: $0 [-e <path/to/file>] [-v <version string>] [-b <path/to/build>]" 1>&2
   exit 1
 }
 
 # default build directory
-BUILD="build/"
+BUILD="dist/"
 
 # default version
 REACT_APP_VERSION="latest"
