@@ -1,16 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { I18nextProvider } from 'react-i18next';
-import i18n from './i18n';
+import { Provider } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.css';
-import './index.css';
-import App from './App';
+import Root from './components/Root';
 import registerServiceWorker from './registerServiceWorker';
 
+import configureStore from './store/configureStore';
+
+const root = document.getElementById('root');
+const { store } = configureStore();
+
 ReactDOM.render(
-  <I18nextProvider i18n={i18n}>
-    <App />
-  </I18nextProvider>,
-  document.getElementById('root'),
+  <Provider store={store}>
+    <Root />
+  </Provider>,
+  root,
 );
+
 registerServiceWorker();
