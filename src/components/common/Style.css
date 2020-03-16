@@ -1,0 +1,17 @@
+.failure-message {
+  color: rgb(244, 67, 54) !important;
+  text-align: center;
+}
+.success-message {
+  color: rgb(76, 175, 80) !important;
+  text-align: center;
+}
+.compare-btn {
+  margin-bottom: 1rem;
+}
+.left-margin {
+  margin-left: 5rem;
+}
+.notification-badge {
+  font-size: 5rem;
+}
